@@ -3,45 +3,40 @@ import styles from '../styles/Home.module.css';
 import { initializeApollo, addApolloState } from '../lib/apolloClient';
 
 import { gql } from '@apollo/client';
+import ArticleList, { GET_ARTICLES } from '../components/ArticleList';
 
 // function index(props) {
 //   console.log("PROPS", props);
 //   return <div>hello</div>;
 // }
 
-function Home({ articles }) {
-    return (
-        <div className={styles.grid}>
-            {articles.map((articles, index) => (
-                <div key={index} className={styles.card}>
-                    <h3>{articles.creator}</h3>
-                    <p>{articles.title}</p>
-                </div>
-            ))}
-        </div>
-    );
-}
+const IndexPage = () => <ArticleList />;
+
+// function Home({ articles }) {
+//     return (
+//         <div className={styles.grid}>
+//             {articles.map((articles, index) => (
+//                 <div key={index} className={styles.card}>
+//                     <h3>{articles.creator}</h3>
+//                     <p>{articles.title}</p>
+//                 </div>
+//             ))}
+//         </div>
+//     );
+// }
 
 export async function getStaticProps() {
     const apolloClient = initializeApollo();
 
-    const { data } = await apolloClient.query({
-        query: gql`
-            query test {
-                articles {
-                    creator
-                    categories
-                }
-            }
-        `
+    await apolloClient.query({
+        query: GET_ARTICLES
     });
 
     return addApolloState(apolloClient, {
-        props: {
-            articles: data.articles
-        },
-        revalidate: 50
+        props: {},
+        revalidate: 100
     });
 }
 
-export default Home;
+export default IndexPage;
+// export default Home;

@@ -3,7 +3,7 @@ import { useApollo } from '../lib/apolloClient';
 import 'tailwindcss/tailwind.css';
 import '../styles/globals.css';
 
-function MyApp({ Component, pageProps }) {
+function App({ Component, pageProps }) {
     const apolloClient = useApollo(pageProps);
     return (
         <ApolloProvider client={apolloClient}>
@@ -12,4 +12,4 @@ function MyApp({ Component, pageProps }) {
     );
 }
 
-export default MyApp;
+export default App;
