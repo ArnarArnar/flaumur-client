@@ -14,40 +14,39 @@ export const querySlice = createSlice({
     name: 'query',
     initialState: initialState(),
     reducers: {
-        addCreatorIn: (state, action) => {
-            state.creatorIn = [...new Set([...state.creatorIn, action.payload])];
+        addToCreatorsIn: (state, action) => {
+            state.creatorsIn = [...new Set([...state.creatorsIn, action.payload])];
         },
-        removeCreatorIn: (state, action) => {
-            state.creatorIn = state.creatorIn.filter((i) => i !== action.payload);
+        removeFromCreatorsIn: (state, action) => {
+            state.creatorsIn = state.creatorsIn.filter((i) => i !== action.payload);
         },
-        resetCreatorIn: (state) => {
-            state.creatorIn = [];
+        resetCreatorsIn: (state) => {
+            state.creatorsIn = [];
         },
-        addCreatorNin: (state, action) => {
-            state.creatorNin = [...new Set([...state.creatorNin, action.payload])];
+        addToCreatorsNin: (state, action) => {
+            state.creatorsNin = [...new Set([...state.creatorsNin, action.payload])];
         },
-        removeCreatorNin: (state, action) => {
-            state.creatorNin = state.creatorNin.filter((i) => i !== action.payload);
+        removeFromCreatorsNin: (state, action) => {
+            state.creatorsNin = state.creatorsNin.filter((i) => i !== action.payload);
         },
-        resetCreatorNin: (state) => {
-            state.creatorNin = [];
+        resetCreatorsNin: (state) => {
+            state.creatorsNin = [];
         },
-        //TODO:
-        addCategoriesIn: (state, action) => {
-            console.log('addCategoriesIn: state', state.categoriesIn, ' action ', action.payload);
-            //state.categoriesIn.push(action.payload);
+        addToCategoriesIn: (state, action) => {
+            console.log('addToCategoriesIn: state', state.categoriesIn, ' action ', action.payload);
+
             state.categoriesIn = [...new Set([...state.categoriesIn, action.payload])];
         },
-        removeCategoriesIn: (state, action) => {
+        removeFromCategoriesIn: (state, action) => {
             state.categoriesIn = state.categoriesIn.filter((i) => i !== action.payload);
         },
         resetCategoriesIn: (state) => {
             state.categoriesIn = [];
         },
-        addCategoriesNin: (state, action) => {
+        addToCategoriesNin: (state, action) => {
             state.categoriesNin = [...new Set([...state.categoriesNin, action.payload])];
         },
-        removeCategoriesNin: (state, action) => {
+        removeFromCategoriesNin: (state, action) => {
             state.categoriesNin = state.categoriesNin.filter((i) => i !== action.payload);
         },
         resetCategoriesNin: (state) => {
@@ -64,17 +63,17 @@ export const querySlice = createSlice({
 });
 
 export const {
-    addCreatorIn,
-    removeCreatorIn,
-    resetCreatorIn,
-    addCreatorNin,
-    removeCreatorNin,
-    resetCreatorNin,
-    addCategoriesIn,
-    removeCategoriesIn,
+    addToCreatorsIn,
+    removeFromCreatorsIn,
+    resetCreatorsIn,
+    addToCreatorsNin,
+    removeFromCreatorsNin,
+    resetCreatorsNin,
+    addToCategoriesIn,
+    removeFromCategoriesIn,
     resetCategoriesIn,
-    addCategoriesNin,
-    removeCategoriesNin,
+    addToCategoriesNin,
+    removeFromCategoriesNin,
     resetCategoriesNin,
     setLimit,
     setOffset,
@@ -96,11 +95,11 @@ export const incrementAsync = (amount) => (dispatch) => {
 // in the slice file. For example: `useSelector((state: RootState) => state.counter.value)`
 
 export const selectQuery = (state) => state.query;
-export const selectCreatorIn = (state) => state.query.creatorIn;
-export const selectCreatorNin = (state) => state.query.creatorIn;
-export const selectCategoriesIn = (state) => state.query.creatorIn;
-export const selectCategoriesNin = (state) => state.query.creatorIn;
-export const selectLimit = (state) => state.query.creatorIn;
-export const selectOffset = (state) => state.query.creatorIn;
+export const selectCreatorsIn = (state) => state.query.creatorsIn;
+export const selectCreatorsNin = (state) => state.query.creatorsNin;
+export const selectCategoriesIn = (state) => state.query.categoriesIn;
+export const selectCategoriesNin = (state) => state.query.categoriesNin;
+export const selectLimit = (state) => state.query.limit;
+export const selectOffset = (state) => state.query.offset;
 
 export default querySlice.reducer;

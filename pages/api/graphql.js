@@ -31,18 +31,3 @@ export const QUERY_ARTICLES = gql`
         }
     }
 `;
-// export const QUERY_ARTICLES = gql`
-//     query articleQueryAndPagination($query: QueryAndPagination) {
-//         articleQueryAndPagination(input: $query) {
-//             guid
-//             creator
-//             title
-//             description
-//             content
-//             publicationDate
-//             categories
-//             url
-//             image
-//         }
-//     }
-// `;

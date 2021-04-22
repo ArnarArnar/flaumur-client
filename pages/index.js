@@ -1,32 +1,16 @@
 import { initializeApollo, addApolloState } from '../lib/apolloClient';
 
-import { gql } from '@apollo/client';
 import ArticleList from '../components/ArticleList';
-import { GET_ARTICLES, QUERY_ARTICLES } from '../pages/api/graphql';
-import Counter from '../components/counter.js';
-import { selectQuery } from '../store/slices/querySlice';
-import { useSelector } from 'react-redux';
-import { initialState } from '../store/slices/querySlice';
-//const IndexPage = () => <ArticleList />;
-const IndexPage = (articles) => <ArticleList articles={articles} />;
+import { QUERY_ARTICLES } from '../pages/api/graphql';
 
-// function Home({ articles }) {
-//     return (
-//         <div>
-//             {articles.map((articles, index) => (
-//                 <div key={index}>
-//                     <h3>{articles.creator}</h3>
-//                     <p>{articles.title}</p>
-//                 </div>
-//             ))}
-//         </div>
-//     );
-// }
+import { initialState } from '../store/slices/querySlice';
+
+const IndexPage = (articles) => <ArticleList articles={articles} />;
 
 export async function getStaticProps() {
     const apolloClient = initializeApollo();
 
-    await apolloClient.query({
+    const { data } = await apolloClient.query({
         query: QUERY_ARTICLES,
         variables: {
             query: initialState()
@@ -34,10 +18,9 @@ export async function getStaticProps() {
         fetchPolicy: 'network-only'
     });
 
+    console.log(`data`, data);
     return addApolloState(apolloClient, {
-        props: {
-            //initialApolloState: apolloClient.cache.extract()
-        },
+        props: { articles: data.articleQueryAndPagination },
         revalidate: 100
     });
 }

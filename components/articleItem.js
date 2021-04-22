@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import * as moment from 'moment';
 import 'moment/locale/is';
 // import ModalButton from '../../../RSS-NextJS/React-mongo-graphql/realm-graphql/src/components/articles/modalButton';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectQuery, addCategoriesIn } from '../store/slices/querySlice';
+import { useDispatch } from 'react-redux';
+import { addCategoriesIn } from '../store/slices/querySlice';
 
 export default function ArticleItem({ article }) {
     const [showContent, setShowContent] = React.useState(false);
