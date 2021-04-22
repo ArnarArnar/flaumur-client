@@ -1,15 +1,13 @@
 import React from 'react';
 import * as moment from 'moment';
 import 'moment/locale/is';
-// import ModalButton from '../../../RSS-NextJS/React-mongo-graphql/realm-graphql/src/components/articles/modalButton';
+import ModalButton from './modalButton';
 import { useDispatch } from 'react-redux';
 import { addCategoriesIn } from '../store/slices/querySlice';
 
 export default function ArticleItem({ article }) {
     const [showContent, setShowContent] = React.useState(false);
-    const dispatch = useDispatch();
-    //const query = useSelector(selectQuery);
-    //console.log(`selectQuery`, query);
+
     const handleSelect = () => setShowContent(!showContent);
 
     return (
@@ -23,11 +21,11 @@ export default function ArticleItem({ article }) {
                             {article.title}
                         </a>
 
-                        {/* <ModalButton
+                        <ModalButton
                             name={article.creator}
-                            operation="creator"
+                            operation="creators"
                             style="flex px-1 text-sm font-medium text-gray-300 bg-gray-800 border border-gray-500 border-solid rounded-sm  outline-none hover:bg-gray-600 focus:outline-none "
-                        /> */}
+                        />
                     </div>
                     <div>
                         {showContent ? (
@@ -55,20 +53,12 @@ export default function ArticleItem({ article }) {
                                 {article.categories
                                     ? article.categories.map((category, index) => {
                                           return (
-                                              //   <ModalButton
-                                              //       name={category}
-                                              //       key={index}
-                                              //       operation="categories"
-                                              //       style="flex px-1 text-xs font-medium text-gray-300 bg-gray-800 border border-solid border-gray-500 rounded-sm outline-none hover:bg-gray-600 focus:outline-none mr-2"
-                                              //   />
-                                              <button
-                                                  key={category}
-                                                  className="flex px-1 mr-2 text-xs font-medium text-gray-300 bg-gray-800 border border-gray-500 border-solid rounded-sm outline-none hover:bg-gray-600 focus:outline-none"
-                                                  onClick={() =>
-                                                      dispatch(addCategoriesIn(category))
-                                                  }>
-                                                  {category}
-                                              </button>
+                                              <ModalButton
+                                                  name={category}
+                                                  key={index}
+                                                  operation="categories"
+                                                  style="flex px-1 text-xs font-medium text-gray-300 bg-gray-800 border border-solid border-gray-500 rounded-sm outline-none hover:bg-gray-600 focus:outline-none mr-2"
+                                              />
                                           );
                                       })
                                     : null}
