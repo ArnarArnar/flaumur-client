@@ -1,21 +1,16 @@
 import React from 'react';
 import Modal from './modal';
 import { useDispatch, useSelector } from 'react-redux';
-//import addFilter from '../utils/services';
 
 import {
     addToCreatorsIn,
     removeFromCreatorsIn,
-    //resetCreatorsIn,
     addToCreatorsNin,
     removeFromCreatorsNin,
-    //resetCreatorsNin,
     addToCategoriesIn,
     removeFromCategoriesIn,
-    // resetCategoriesIn,
     addToCategoriesNin,
     removeFromCategoriesNin,
-    //resetCategoriesNin,
     selectQuery
 } from '../store/slices/querySlice';
 
@@ -31,7 +26,7 @@ const CreatorButton = ({ name, operation, style }) => {
         modalRef.current.openModal();
     };
 
-    const getCurrentChecked = (operation, name) => {
+    const getCurrentChecked = (name, operation) => {
         if (operation == 'creators') {
             if (query.creatorsIn.some((i) => i === name)) {
                 setIsFilter('filterWith');
@@ -74,13 +69,15 @@ const CreatorButton = ({ name, operation, style }) => {
             } else {
                 dispatch(removeFromCreatorsNin(name));
             }
+            return;
         }
         if (operation == 'categories') {
-            if (query.creatorsIn.some((i) => i === name)) {
+            if (query.categoriesIn.some((i) => i === name)) {
                 dispatch(removeFromCategoriesIn(name));
             } else {
                 dispatch(removeFromCategoriesNin(name));
             }
+            return;
         }
         throw new Error(`Unable to uncheck the filter ${name}`);
     };
@@ -93,6 +90,7 @@ const CreatorButton = ({ name, operation, style }) => {
             } else {
                 dispatch(addToCreatorsNin(name));
             }
+            return;
         }
         if (operation == 'categories') {
             if (addOrRemove == 'In') {
@@ -100,6 +98,7 @@ const CreatorButton = ({ name, operation, style }) => {
             } else {
                 dispatch(addToCategoriesNin(name));
             }
+            return;
         }
     };
 
@@ -134,7 +133,7 @@ const CreatorButton = ({ name, operation, style }) => {
             <button
                 className={`${style} ${isAFilter(name) ? 'border-gray-800' : ''}`}
                 onClick={() => {
-                    getCurrentChecked(operation, name);
+                    getCurrentChecked(name, operation);
                     openModal();
                 }}>
                 <span className="flex-1 pr-1 font-semibold">{name}</span>
