@@ -1,15 +1,20 @@
 import { ApolloProvider } from '@apollo/client';
 import { useApollo } from '../lib/apolloClient';
-import 'tailwindcss/tailwind.css';
-import '../styles/globals.css';
+import store from '../store/store.js';
+import { Provider } from 'react-redux';
 
-function App({ Component, pageProps }) {
+import 'tailwindcss/tailwind.css';
+
+const App = ({ Component, pageProps }) => {
+    console.log(`pageProps`, pageProps);
     const apolloClient = useApollo(pageProps);
     return (
-        <ApolloProvider client={apolloClient}>
-            <Component {...pageProps} />;
-        </ApolloProvider>
+        <Provider store={store}>
+            <ApolloProvider client={apolloClient}>
+                <Component {...pageProps} />;
+            </ApolloProvider>
+        </Provider>
     );
-}
+};
 
 export default App;

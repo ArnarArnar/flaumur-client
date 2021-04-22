@@ -2,10 +2,14 @@ import React, { useState, useEffect } from 'react';
 import * as moment from 'moment';
 import 'moment/locale/is';
 // import ModalButton from '../../../RSS-NextJS/React-mongo-graphql/realm-graphql/src/components/articles/modalButton';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectQuery, addCategoriesIn } from '../store/slices/querySlice';
 
 export default function ArticleItem({ article }) {
     const [showContent, setShowContent] = React.useState(false);
-
+    const dispatch = useDispatch();
+    //const query = useSelector(selectQuery);
+    //console.log(`selectQuery`, query);
     const handleSelect = () => setShowContent(!showContent);
 
     return (
@@ -18,6 +22,7 @@ export default function ArticleItem({ article }) {
                             className="text-lg leading-none text-gray-200 hover:text-gray-50">
                             {article.title}
                         </a>
+
                         {/* <ModalButton
                             name={article.creator}
                             operation="creator"
@@ -56,11 +61,14 @@ export default function ArticleItem({ article }) {
                                               //       operation="categories"
                                               //       style="flex px-1 text-xs font-medium text-gray-300 bg-gray-800 border border-solid border-gray-500 rounded-sm outline-none hover:bg-gray-600 focus:outline-none mr-2"
                                               //   />
-                                              <div
-                                                  key={index}
-                                                  className="flex px-1 text-xs font-medium text-gray-300 bg-gray-800 border border-solid border-gray-500 rounded-sm outline-none hover:bg-gray-600 focus:outline-none mr-2">
+                                              <button
+                                                  key={category}
+                                                  className="flex px-1 mr-2 text-xs font-medium text-gray-300 bg-gray-800 border border-gray-500 border-solid rounded-sm outline-none hover:bg-gray-600 focus:outline-none"
+                                                  onClick={() =>
+                                                      dispatch(addCategoriesIn(category))
+                                                  }>
                                                   {category}
-                                              </div>
+                                              </button>
                                           );
                                       })
                                     : null}
