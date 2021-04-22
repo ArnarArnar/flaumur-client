@@ -1,8 +1,6 @@
 import { initializeApollo, addApolloState } from '../lib/apolloClient';
-
 import ArticleList from '../components/ArticleList';
 import { QUERY_ARTICLES } from '../pages/api/graphql';
-
 import { initialState } from '../store/slices/querySlice';
 
 const IndexPage = (articles) => <ArticleList articles={articles} />;

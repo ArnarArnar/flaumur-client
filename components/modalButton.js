@@ -6,16 +6,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
     addToCreatorsIn,
     removeFromCreatorsIn,
-    resetCreatorsIn,
+    //resetCreatorsIn,
     addToCreatorsNin,
     removeFromCreatorsNin,
-    resetCreatorsNin,
+    //resetCreatorsNin,
     addToCategoriesIn,
     removeFromCategoriesIn,
-    resetCategoriesIn,
+    // resetCategoriesIn,
     addToCategoriesNin,
     removeFromCategoriesNin,
-    resetCategoriesNin,
+    //resetCategoriesNin,
     selectQuery
 } from '../store/slices/querySlice';
 
@@ -32,16 +32,16 @@ const CreatorButton = ({ name, operation, style }) => {
     };
 
     const getCurrentChecked = (operation, name) => {
-        if (operation == 'categories') {
-            if (query.categoriesIn.some((i) => i === name)) {
+        if (operation == 'creators') {
+            if (query.creatorsIn.some((i) => i === name)) {
                 setIsFilter('filterWith');
             } else if (query.categoriesNin.some((i) => i === name)) {
                 setIsFilter('filterWithout');
             } else {
                 setIsFilter('');
             }
-        } else if (operation == 'creators') {
-            if (query.creatorsIn.some((i) => i === name)) {
+        } else if (operation == 'categories') {
+            if (query.categoriesIn.some((i) => i === name)) {
                 setIsFilter('filterWith');
             } else if (query.categoriesNin.some((i) => i === name)) {
                 setIsFilter('filterWithout');
@@ -67,17 +67,31 @@ const CreatorButton = ({ name, operation, style }) => {
     };
 
     // search through all arrays and remove
-    const unCheckFilter = (name) => {
-        return true;
+    const unCheckFilter = (name, operation) => {
+        if (operation == 'creators') {
+            if (query.creatorsIn.some((i) => i === name)) {
+                dispatch(removeFromCreatorsIn(name));
+            } else {
+                dispatch(removeFromCreatorsNin(name));
+            }
+        }
+        if (operation == 'categories') {
+            if (query.creatorsIn.some((i) => i === name)) {
+                dispatch(removeFromCategoriesIn(name));
+            } else {
+                dispatch(removeFromCategoriesNin(name));
+            }
+        }
+        throw new Error(`Unable to uncheck the filter ${name}`);
     };
 
     const addFilter = (name, operation, addOrRemove) => {
         checkIfAlreadyInReverse(name, operation, addOrRemove);
         if (operation == 'creators') {
             if (addOrRemove == 'In') {
-                dispatch(addToCategoriesIn(name));
+                dispatch(addToCreatorsIn(name));
             } else {
-                dispatch(addToCategoriesNin(name));
+                dispatch(addToCreatorsNin(name));
             }
         }
         if (operation == 'categories') {

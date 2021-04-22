@@ -4,7 +4,7 @@ import ArticleItem from './articleItem';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { QUERY_ARTICLES } from '../pages/api/graphql';
-import { selectQuery, setLimit, addCategoryIn } from '../store/slices/querySlice';
+import { selectQuery, setLimit } from '../store/slices/querySlice';
 
 export default function ArticleList(pageProps) {
     const query = useSelector(selectQuery);
