@@ -52,6 +52,7 @@ export default function ArticleItem({ article }) {
                                     ? article.categories.map((category, index) => {
                                           return (
                                               <ModalButton
+                                                  parentCallback={handleCallback.bind(this)}
                                                   name={category}
                                                   key={index}
                                                   operation="categories"

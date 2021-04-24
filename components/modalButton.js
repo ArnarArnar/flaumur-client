@@ -15,7 +15,7 @@ import {
 } from '../store/slices/querySlice';
 
 // eslint-disable-next-line no-unused-vars
-const CreatorButton = ({ name, operation, style }) => {
+const CreatorButton = ({ name, operation, style, parentCallback }) => {
     const modalRef = React.useRef();
     const dispatch = useDispatch();
     const query = useSelector(selectQuery);
@@ -128,6 +128,11 @@ const CreatorButton = ({ name, operation, style }) => {
         }
     };
 
+    const getQuery = () => {
+        console.log('getQuery');
+        parentCallback;
+    };
+
     return (
         <div className="relative inline-block group">
             <button
@@ -164,6 +169,7 @@ const CreatorButton = ({ name, operation, style }) => {
                     className="p-3 border-b border-gray-500 last:border-b-0 "
                     onChange={() => {
                         addFilter(name, operation, 'In');
+                        getQuery();
                     }}>
                     <input
                         id="radio2"
@@ -183,6 +189,7 @@ const CreatorButton = ({ name, operation, style }) => {
                     className="p-3 border-b border-gray-500 last:border-b-0"
                     onChange={() => {
                         addFilter(name, operation, 'Nin');
+                        getQuery();
                     }}>
                     <input
                         id="radio3"
