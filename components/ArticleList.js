@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import ArticleItem from './articleItem';
+import ArticleItem from './ArticleItem';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { QUERY_ARTICLES } from '../pages/api/graphql';
@@ -22,7 +22,7 @@ export default function ArticleList(pageProps) {
     };
 
     if (error) return <div> Error loading posts.</div>;
-    if (loading) return <div>Loading</div>;
+    //if (loading) return <div>Loading</div>;
     if (data) {
         console.log(`If data`, data);
         setTimeout(() => console.log('state', pageProps.articles.articles), [500]);
@@ -37,7 +37,7 @@ export default function ArticleList(pageProps) {
                   ))
                 : null}
             <button onClick={() => loadMorePosts()} disabled={loading}>
-                {loading ? 'Loading...' : 'Show More'}
+                {loading ? 'Hleður...' : 'Sækja fleiri fréttir'}
             </button>
         </div>
     );

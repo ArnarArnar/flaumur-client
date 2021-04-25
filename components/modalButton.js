@@ -74,15 +74,15 @@ const CreatorButton = ({ name, operation, style }) => {
             } else {
                 dispatch(removeFromCreatorsNin(name));
             }
-        }
-        if (operation == 'categories') {
-            if (query.creatorsIn.some((i) => i === name)) {
+        } else if (operation == 'categories') {
+            if (query.categoriesIn.some((i) => i === name)) {
                 dispatch(removeFromCategoriesIn(name));
             } else {
                 dispatch(removeFromCategoriesNin(name));
             }
+        } else {
+            throw new Error(`Unable to uncheck the filter ${name}`);
         }
-        throw new Error(`Unable to uncheck the filter ${name}`);
     };
 
     const addFilter = (name, operation, addOrRemove) => {
