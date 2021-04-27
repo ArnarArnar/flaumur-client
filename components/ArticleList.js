@@ -14,7 +14,7 @@ export default function ArticleList() {
         variables: {
             query: query
         },
-        fetchPolicy: 'network-only'
+        fetchPolicy: 'cache-and-network'
     });
 
     const loadMorePosts = () => {
@@ -49,7 +49,7 @@ export default function ArticleList() {
                     {loading ? null : 'Sækja fleiri fréttir'}
                 </button>
             ) : null}
-            {data && loading ? (
+            {loading ? (
                 <>
                     <LoadingArticleItem />
                     <LoadingArticleItem />
