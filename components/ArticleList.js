@@ -7,7 +7,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { QUERY_ARTICLES } from '../pages/api/graphql';
 import { selectQuery, setLimit } from '../store/slices/querySlice';
 
-export default function ArticleList(pageProps) {
+export default function ArticleList() {
     const query = useSelector(selectQuery);
     const dispatch = useDispatch();
     const { loading, error, data } = useQuery(QUERY_ARTICLES, {

@@ -1,25 +1,19 @@
 import React from 'react';
-import Modal from './modal';
+import Modal from './Modal';
 import { useDispatch, useSelector } from 'react-redux';
-//import addFilter from '../utils/services';
 
 import {
     addToCreatorsIn,
     removeFromCreatorsIn,
-    //resetCreatorsIn,
     addToCreatorsNin,
     removeFromCreatorsNin,
-    //resetCreatorsNin,
     addToCategoriesIn,
     removeFromCategoriesIn,
-    // resetCategoriesIn,
     addToCategoriesNin,
     removeFromCategoriesNin,
-    //resetCategoriesNin,
     selectQuery
 } from '../store/slices/querySlice';
 
-// eslint-disable-next-line no-unused-vars
 const CreatorButton = ({ name, operation, style }) => {
     const modalRef = React.useRef();
     const dispatch = useDispatch();

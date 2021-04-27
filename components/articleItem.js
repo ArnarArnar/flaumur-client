@@ -2,14 +2,12 @@ import React from 'react';
 import ModalImage from 'react-modal-image';
 import * as moment from 'moment';
 import 'moment/locale/is';
-import ModalButton from './modalButton';
+import ModalButton from './ModalButton';
 
 export default function ArticleItem({ article }) {
     const [showContent, setShowContent] = React.useState(false);
-    //const [showLightbox, setShowLightbox] = React.useState(false);
 
     const handleSelect = () => setShowContent(!showContent);
-    //const handleSelectImage = () => setShowLightbox(!showContent);
 
     return (
         <div className="p-3 pt-2 mx-auto bg-black border-b border-gray-600 max-w-m last:border-b-0">
