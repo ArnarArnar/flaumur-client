@@ -34,11 +34,6 @@ export default function ArticleItem({ article }) {
                                         id="imageContainer"
                                         className="float-right h-full ml-2 md:hidden">
                                         <div className="relative pb-32 pr-32 overflow-hidden rounded">
-                                            {/* <img
-                                                alt="Test"
-                                                className="absolute object-cover w-full h-full border border-gray-700 border-solid"
-                                                src={article.image}
-                                            /> */}
                                             <ModalImage
                                                 className="absolute object-cover w-full h-full border border-gray-700 border-solid"
                                                 small={article.image}

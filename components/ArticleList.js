@@ -19,7 +19,6 @@ export default function ArticleList() {
 
     const loadMorePosts = () => {
         dispatch(setLimit(query.limit * 2));
-        console.log(`query.limit`, query.limit);
     };
 
     if (error) {
@@ -50,7 +49,7 @@ export default function ArticleList() {
                     {loading ? null : 'Sækja fleiri fréttir'}
                 </button>
             ) : null}
-            {loading ? (
+            {data && loading ? (
                 <>
                     <LoadingArticleItem />
                     <LoadingArticleItem />

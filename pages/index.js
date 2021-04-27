@@ -24,7 +24,6 @@ export async function getStaticProps() {
         fetchPolicy: 'network-only'
     });
 
-    console.log(`data`, data);
     return addApolloState(apolloClient, {
         props: { articles: data.articleQueryAndPagination },
         revalidate: 100
