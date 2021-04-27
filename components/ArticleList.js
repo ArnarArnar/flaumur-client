@@ -14,7 +14,7 @@ export default function ArticleList() {
         variables: {
             query: query
         },
-        fetchPolicy: 'cache-and-network'
+        fetchPolicy: 'network-only'
     });
 
     const loadMorePosts = () => {
