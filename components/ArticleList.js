@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import ArticleItem from './ArticleItem';
-import LoadingArticleItem from './LoadingArticleItem';
+import ArticleItem from './ArticleItem.js';
+import LoadingArticleItem from './LoadingArticleItem.js';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { QUERY_ARTICLES } from '../pages/api/graphql';
