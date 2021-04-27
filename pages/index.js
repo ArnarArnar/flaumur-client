@@ -1,6 +1,6 @@
 import { initializeApollo, addApolloState } from '../lib/apolloClient';
 import ArticleList from '../components/ArticleList';
-import Sidebar from '../components/sidebar';
+import Sidebar from '../components/Sidebar';
 import { QUERY_ARTICLES } from '../pages/api/graphql';
 import { initialState } from '../store/slices/querySlice';
 
