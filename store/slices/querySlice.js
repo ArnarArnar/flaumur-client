@@ -5,7 +5,7 @@ export const initialState = () => ({
     creatorsNin: [],
     categoriesIn: [],
     categoriesNin: [],
-    limit: 15,
+    limit: 30,
     offset: 0
 });
 

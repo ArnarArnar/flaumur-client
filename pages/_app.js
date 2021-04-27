@@ -12,7 +12,7 @@ const App = ({ Component, pageProps }) => {
     return (
         <Provider store={store}>
             <ApolloProvider client={apolloClient}>
-                <Component {...pageProps} />
+                <Component {...pageProps} wait={false} />
             </ApolloProvider>
         </Provider>
     );
