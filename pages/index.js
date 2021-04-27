@@ -1,9 +1,17 @@
 import { initializeApollo, addApolloState } from '../lib/apolloClient';
 import ArticleList from '../components/ArticleList';
+import Sidebar from '../components/sidebar';
 import { QUERY_ARTICLES } from '../pages/api/graphql';
 import { initialState } from '../store/slices/querySlice';
 
-const IndexPage = (articles) => <ArticleList articles={articles} />;
+const IndexPage = (articles) => {
+    return (
+        <>
+            <Sidebar />
+            <ArticleList articles={articles} />
+        </>
+    );
+};
 
 export async function getStaticProps() {
     const apolloClient = initializeApollo();

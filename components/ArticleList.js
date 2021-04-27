@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import ArticleItem from './ArticleItem';
+import LoadingArticleItem from './LoadingArticleItem';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { QUERY_ARTICLES } from '../pages/api/graphql';
@@ -9,7 +10,6 @@ import { selectQuery, setLimit } from '../store/slices/querySlice';
 export default function ArticleList(pageProps) {
     const query = useSelector(selectQuery);
     const dispatch = useDispatch();
-
     const { loading, error, data } = useQuery(QUERY_ARTICLES, {
         variables: {
             query: query
@@ -18,16 +18,22 @@ export default function ArticleList(pageProps) {
     });
 
     const loadMorePosts = () => {
-        dispatch(setLimit(10));
+        dispatch(setLimit(query.limit * 2));
+        console.log(`query.limit`, query.limit);
     };
 
-    if (error) return <div> Error loading posts.</div>;
-    //if (loading) return <div>Loading</div>;
-    if (data) {
-        console.log(`If data`, data);
-        setTimeout(() => console.log('state', pageProps.articles.articles), [500]);
+    if (error) {
+        if (error.message === '{"message":"400: not found","name":"Error"}') {
+            return (
+                <div className="mt-16 text-center text-gray-400">
+                    Engar fréttir fundust með þessum leitarskilyrðum
+                </div>
+            );
+        }
+        return (
+            <div className="mt-16 text-center text-gray-400">Internal Error, please try again</div>
+        );
     }
-    console.log(`query`, query);
 
     return (
         <div>
@@ -36,9 +42,20 @@ export default function ArticleList(pageProps) {
                       <ArticleItem class="ml-1 mr-1" key={article.guid} article={article} />
                   ))
                 : null}
-            <button onClick={() => loadMorePosts()} disabled={loading}>
-                {loading ? 'Hleður...' : 'Sækja fleiri fréttir'}
-            </button>
+            {data && data.articleQueryAndPagination.length >= query.limit ? (
+                <button
+                    className="px-1 m-2 text-xs font-medium text-green-700 bg-black border border-gray-300 border-solid rounded-sm outline-none focus:outline-none max-content"
+                    onClick={() => loadMorePosts()}
+                    disabled={loading}>
+                    {loading ? null : 'Sækja fleiri fréttir'}
+                </button>
+            ) : null}
+            {loading ? (
+                <>
+                    <LoadingArticleItem />
+                    <LoadingArticleItem />
+                </>
+            ) : null}
         </div>
     );
 }
