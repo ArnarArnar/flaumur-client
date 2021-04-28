@@ -21,6 +21,7 @@ export async function getStaticProps() {
         variables: {
             query: initialState()
         },
+
         fetchPolicy: 'network-only'
     });
 
