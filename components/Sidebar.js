@@ -15,12 +15,14 @@ import {
     resetQuery
 } from '../store/slices/querySlice';
 
-export default function Sidebar() {
+export default function Sidebar({ data }) {
     const [isOpen, setIsOpen] = React.useState(false);
     const dispatch = useDispatch();
     const query = useSelector(selectQuery);
 
     const drawer = () => setIsOpen(!isOpen);
+
+    console.log(`Data in Sidebara`, data.creatorsList);
 
     React.useEffect(() => {
         const close = (e) => {
