@@ -1,3 +1,4 @@
+import React from "react";
 import { initializeApollo, addApolloState } from '../lib/apolloClient';
 import ArticleList from '../components/ArticleList';
 import Sidebar from '../components/Sidebar';

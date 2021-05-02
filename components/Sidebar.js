@@ -2,6 +2,8 @@ import React from 'react';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 
+import SelectSearch, { fuzzySearch } from 'react-select-search/dist/cjs';
+
 import {
     addToCreatorsIn,
     removeFromCreatorsIn,
@@ -17,12 +19,45 @@ import {
 
 export default function Sidebar({ data }) {
     const [isOpen, setIsOpen] = React.useState(false);
+    const [creatorsOpen, setCreatorsOpen] = React.useState(false);
+    const [categoriesOpen, setCategoriesOpen] = React.useState(false);
+    const [category, setCategory] = React.useState('');
+    const [creator, setCreator] = React.useState('');
+    const textInput = React.useRef(null);
     const dispatch = useDispatch();
     const query = useSelector(selectQuery);
 
-    const drawer = () => setIsOpen(!isOpen);
+    const toggleCreatorsOpen = async () => setCreatorsOpen(!creatorsOpen);
+    const toggleCategoriesOpen = async () => setCategoriesOpen(!categoriesOpen);
 
-    console.log(`Data in Sidebara`, data.creatorsList);
+    React.useEffect(() => {
+        if (creatorsOpen) {
+            return;
+        }
+        return () => {
+            let input = document.querySelector('.select-search__input');
+            input.focus();
+        };
+    }, [creatorsOpen]);
+
+    React.useEffect(() => {
+        if (categoriesOpen) {
+            return;
+        }
+        return () => {
+            let input = document.querySelector('.select-search__input');
+            input.focus();
+        };
+    }, [categoriesOpen]);
+
+    React.useEffect(() => {
+        if (!isOpen) {
+            setCreatorsOpen(false);
+            setCreator('');
+        }
+    }, [isOpen]);
+
+    const drawer = () => setIsOpen(!isOpen);
 
     React.useEffect(() => {
         const close = (e) => {
@@ -82,8 +117,50 @@ export default function Sidebar({ data }) {
         }
     };
 
+    const checkIfAlreadyInReverse = (name, operation, addOrRemove) => {
+        let reverse = addOrRemove == 'In' ? 'Nin' : 'In';
+        reverse = operation.toString() + reverse.toString();
+        if (operation == 'creators') {
+            if (query[reverse] && query[reverse].find((item) => item == name)) {
+                if (addOrRemove == 'In') {
+                    dispatch(removeFromCreatorsNin(name));
+                } else {
+                    dispatch(removeFromCreatorsIn(name));
+                }
+                return;
+            }
+        }
+        if (operation == 'categories') {
+            if (query[reverse] && query[reverse].find((item) => item == name)) {
+                if (addOrRemove == 'In') {
+                    dispatch(removeFromCategoriesNin(name));
+                } else {
+                    dispatch(removeFromCategoriesIn(name));
+                }
+                return;
+            }
+        }
+    };
+
+    const addFilter = (name, operation, addOrRemove) => {
+        checkIfAlreadyInReverse(name, operation, addOrRemove);
+        if (operation == 'creators') {
+            if (addOrRemove == 'In') {
+                dispatch(addToCreatorsIn(name));
+            } else {
+                dispatch(addToCreatorsNin(name));
+            }
+        }
+        if (operation == 'categories') {
+            if (addOrRemove == 'In') {
+                dispatch(addToCategoriesIn(name));
+            } else {
+                dispatch(addToCategoriesNin(name));
+            }
+        }
+    };
+
     const RenderCategoryItem = ({ array, operation }) => {
-        console.log(`array`, array);
         return (
             <>
                 {ShowTypesOfFilters(operation)}
@@ -192,12 +269,89 @@ export default function Sidebar({ data }) {
                 <div className="flex flex-col justify-between h-1/3">
                     <div className="pt-3">
                         <span className="flex items-center justify-end pr-4 mb-3 text-gray-400">
-                            <span className="text-4xl font-black">FLOKKAR</span>
+                            <span
+                                className="text-4xl font-black"
+                                onClick={() => toggleCategoriesOpen()}>
+                                FLOKKAR
+                            </span>
                         </span>
+                        {categoriesOpen ? (
+                            <SelectSearch
+                                options={data.categoriesList}
+                                search
+                                className={categoriesOpen ? 'select-search has-focus' : ''}
+                                printOptions="on-focus"
+                                placeholder="Veldu vefsíðu"
+                                value={category}
+                                onChange={setCategory}
+                                filterOptions={fuzzySearch}
+                            />
+                        ) : null}
+                        {category ? (
+                            <div className="flex mb-4 justify-evenly">
+                                <div
+                                    onClick={() => {
+                                        addFilter(category, 'categories', 'In');
+                                        setCategory('');
+                                        setCategoriesOpen(false);
+                                    }}
+                                    className="flex px-1 mt-2 mr-2 font-medium text-green-700 bg-gray-800 border border-gray-500 border-solid rounded-sm outline-none text-s hover:bg-gray-600 focus:outline-none">
+                                    Niðurstöður með
+                                </div>
+                                <div
+                                    onClick={() => {
+                                        addFilter(category, 'categories', 'Nin');
+                                        setCategory('');
+                                        setCategoriesOpen(false);
+                                    }}
+                                    className="flex px-1 mt-2 ml-2 font-medium text-red-700 bg-gray-800 border border-gray-500 border-solid rounded-sm outline-none text-s hover:bg-gray-600 focus:outline-none">
+                                    Niðurstöður án
+                                </div>
+                            </div>
+                        ) : null}
 
                         <span className="flex items-center justify-end pr-4 text-gray-400 ">
-                            <span className="text-4xl font-black">VEFSÍÐUR</span>
+                            <span
+                                className="text-4xl font-black"
+                                onClick={() => toggleCreatorsOpen()}>
+                                VEFSÍÐUR
+                            </span>
                         </span>
+
+                        {creatorsOpen ? (
+                            <SelectSearch
+                                options={data.creatorsList}
+                                search
+                                className={creatorsOpen ? 'select-search has-focus' : ''}
+                                printOptions="on-focus"
+                                placeholder="Veldu vefsíðu"
+                                value={creator}
+                                onChange={setCreator}
+                                filterOptions={fuzzySearch}
+                            />
+                        ) : null}
+                        {creator ? (
+                            <div className="flex mb-4 justify-evenly">
+                                <div
+                                    onClick={() => {
+                                        addFilter(creator, 'creators', 'In');
+                                        setCreator('');
+                                        setCreatorsOpen(false);
+                                    }}
+                                    className="flex px-1 mt-2 mr-2 font-medium text-green-700 bg-gray-800 border border-gray-500 border-solid rounded-sm outline-none text-s hover:bg-gray-600 focus:outline-none">
+                                    Niðurstöður með
+                                </div>
+                                <div
+                                    onClick={() => {
+                                        addFilter(creator, 'creators', 'Nin');
+                                        setCreator('');
+                                        setCreatorsOpen(false);
+                                    }}
+                                    className="flex px-1 mt-2 ml-2 font-medium text-red-700 bg-gray-800 border border-gray-500 border-solid rounded-sm outline-none text-s hover:bg-gray-600 focus:outline-none">
+                                    Niðurstöður án
+                                </div>
+                            </div>
+                        ) : null}
                     </div>
                     <div className="w-full">
                         <div className="flex items-end w-full p-3"></div>

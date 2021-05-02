@@ -32,8 +32,6 @@ export const querySlice = createSlice({
             state.creatorsNin = [];
         },
         addToCategoriesIn: (state, action) => {
-            console.log('addToCategoriesIn: state', state.categoriesIn, ' action ', action.payload);
-
             state.categoriesIn = [...new Set([...state.categoriesIn, action.payload])];
         },
         removeFromCategoriesIn: (state, action) => {

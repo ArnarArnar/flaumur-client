@@ -14,6 +14,7 @@
         "@reduxjs/toolkit": "^1.5.1",
         "@svgr/webpack": "^5.5.0",
         "deepmerge": "^4.2.2",
+        "fuse.js": "^6.4.6",
         "graphql": "^15.5.0",
         "lodash.isequal": "^4.5.0",
         "moment": "^2.29.1",
@@ -22,6 +23,7 @@
         "react-dom": "17.0.2",
         "react-modal-image": "^2.5.0",
         "react-redux": "^7.2.3",
+        "react-select-search": "^3.0.6",
         "realm-web": "^1.2.1",
         "swr": "^0.5.5",
         "tailwind-hamburgers": "^1.0.2"

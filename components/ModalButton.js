@@ -98,7 +98,6 @@ const CreatorButton = ({ name, operation, style }) => {
     };
 
     const checkIfAlreadyInReverse = (name, operation, addOrRemove) => {
-        console.log(`checkIfAlreadyInReveres`);
         let reverse = addOrRemove == 'In' ? 'Nin' : 'In';
         reverse = operation.toString() + reverse.toString();
         if (operation == 'creators') {
