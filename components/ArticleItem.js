@@ -10,7 +10,7 @@ export default function ArticleItem({ article }) {
     const handleSelect = () => setShowContent(!showContent);
 
     return (
-        <div className="p-3 pt-2 mx-auto bg-black border-b border-gray-600 max-w-m last:border-b-0">
+        <div className="p-3 pt-2 mx-auto bg-black border-b border-gray-600 first:pt-10 last:border-0 max-w-m ">
             <div id="content-container " className="flex">
                 <div className="flex flex-col justify-between w-full ">
                     <div className="flex flex-row justify-between">

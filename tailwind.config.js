@@ -824,7 +824,7 @@ module.exports = {
         outline: ['responsive', 'focus-within', 'focus'],
         overflow: ['responsive'],
         overscrollBehavior: ['responsive'],
-        padding: ['responsive'],
+        padding: ['responsive', 'first'],
         placeContent: ['responsive'],
         placeItems: ['responsive'],
         placeSelf: ['responsive'],

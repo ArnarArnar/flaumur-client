@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -23,12 +24,14 @@ export default function Sidebar({ data }) {
     const [categoriesOpen, setCategoriesOpen] = React.useState(false);
     const [category, setCategory] = React.useState('');
     const [creator, setCreator] = React.useState('');
+    // Toggle filter and close button when mobile keyboard is open
+    const [showButtons, setShowButtons] = React.useState(true);
     const textInput = React.useRef(null);
     const dispatch = useDispatch();
     const query = useSelector(selectQuery);
 
-    const toggleCreatorsOpen = async () => setCreatorsOpen(!creatorsOpen);
-    const toggleCategoriesOpen = async () => setCategoriesOpen(!categoriesOpen);
+    const toggleCreatorsOpen = () => setCreatorsOpen(!creatorsOpen);
+    const toggleCategoriesOpen = () => setCategoriesOpen(!categoriesOpen);
 
     React.useEffect(() => {
         if (creatorsOpen) {
@@ -46,7 +49,9 @@ export default function Sidebar({ data }) {
         }
         return () => {
             let input = document.querySelector('.select-search__input');
-            input.focus();
+            if (input !== null) {
+                input.focus();
+            }
         };
     }, [categoriesOpen]);
 
@@ -54,6 +59,8 @@ export default function Sidebar({ data }) {
         if (!isOpen) {
             setCreatorsOpen(false);
             setCreator('');
+            setCategoriesOpen(false);
+            setCategory('');
         }
     }, [isOpen]);
 
@@ -63,6 +70,8 @@ export default function Sidebar({ data }) {
         const close = (e) => {
             if (e.keyCode === 27) {
                 setIsOpen(false);
+                setCategoriesOpen(false);
+                setCreatorsOpen(false);
             }
         };
         window.addEventListener('keydown', close);
@@ -221,38 +230,7 @@ export default function Sidebar({ data }) {
     }
 
     return (
-        <nav className="relative">
-            <div className="fixed z-40 bottom-5 right-4 ">
-                {areFilters() ? (
-                    <button
-                        className="mr-20 align-bottom focus:outline-none"
-                        onClick={() => dispatch(resetQuery())}>
-                        <span
-                            className={`z-20 flex items-center justify-center w-16 h-16   rounded-full ${
-                                isOpen ? 'bg-black' : 'bg-gray-500'
-                            }`}>
-                            <Image
-                                priority="true"
-                                src="/img/remove_filter.svg"
-                                width="40"
-                                height="40"
-                            />
-                        </span>
-                    </button>
-                ) : null}
-                <button className="mr-2 focus:outline-none" aria-label="Open Menu" onClick={drawer}>
-                    <div
-                        id="box"
-                        className={` w-16 h-16 z-40 tham tham-e-squeeze tham-w-8 rounded-full
-                            ${isOpen ? 'bg-black tham-active' : 'bg-gray-500'}
-                        `}>
-                        <div className="z-40 tham-box">
-                            <div className="z-40 bg-white tham-inner" />
-                        </div>
-                    </div>
-                </button>
-            </div>
-
+        <nav>
             {isOpen ? (
                 <div onClick={drawer} className="fixed inset-0 z-10 transition-opacity">
                     <div
@@ -269,17 +247,23 @@ export default function Sidebar({ data }) {
                 <div className="flex flex-col justify-between h-1/3">
                     <div className="pt-3">
                         <span className="flex items-center justify-end pr-4 mb-3 text-gray-400">
-                            <span
-                                className="text-4xl font-black"
-                                onClick={() => toggleCategoriesOpen()}>
+                            <button
+                                className="text-4xl font-black hover:text-gray-300"
+                                onClick={() => {
+                                    toggleCategoriesOpen();
+                                    setCreatorsOpen(false);
+                                    setCreator('');
+                                    setCategory('');
+                                }}>
                                 FLOKKAR
-                            </span>
+                            </button>
                         </span>
                         {categoriesOpen ? (
                             <SelectSearch
                                 options={data.categoriesList}
                                 search
                                 className={categoriesOpen ? 'select-search has-focus' : ''}
+                                //printOptions="always"
                                 printOptions="on-focus"
                                 placeholder="Veldu vefsíðu"
                                 value={category}
@@ -311,11 +295,16 @@ export default function Sidebar({ data }) {
                         ) : null}
 
                         <span className="flex items-center justify-end pr-4 text-gray-400 ">
-                            <span
-                                className="text-4xl font-black"
-                                onClick={() => toggleCreatorsOpen()}>
+                            <button
+                                className="text-4xl font-black hover:text-gray-300"
+                                onClick={() => {
+                                    toggleCreatorsOpen();
+                                    setCategoriesOpen(false);
+                                    setCategory('');
+                                    setCreator('');
+                                }}>
                                 VEFSÍÐUR
-                            </span>
+                            </button>
                         </span>
 
                         {creatorsOpen ? (
@@ -324,6 +313,7 @@ export default function Sidebar({ data }) {
                                 search
                                 className={creatorsOpen ? 'select-search has-focus' : ''}
                                 printOptions="on-focus"
+                                //printOptions="always"
                                 placeholder="Veldu vefsíðu"
                                 value={creator}
                                 onChange={setCreator}
@@ -422,6 +412,39 @@ export default function Sidebar({ data }) {
                         </div>
                     ) : null}
                 </div>
+            </div>
+            <div className="fixed z-40 bottom-5 right-4 ">
+                {areFilters() ? (
+                    <button
+                        className="mr-20 align-bottom outline-none focus:outline-none"
+                        onClick={() => dispatch(resetQuery())}>
+                        <span
+                            className={`z-20 flex items-center focus:outline-none justify-center w-16 h-16   rounded-full ${
+                                isOpen ? 'bg-black' : 'bg-gray-500'
+                            }`}>
+                            <Image
+                                priority="true"
+                                src="/img/remove_filter.svg"
+                                width="40"
+                                height="40"
+                            />
+                        </span>
+                    </button>
+                ) : null}
+                <button
+                    className="w-16 h-16 mr-2 rounded-full focus:outline-none"
+                    aria-label="Open Menu"
+                    onClick={drawer}>
+                    <div
+                        id="box"
+                        className={` w-16 h-16 z-30 rounded-full tham tham-e-squeeze tham-w-8 
+                            ${isOpen ? 'bg-black tham-active' : 'bg-gray-500'}
+                        `}>
+                        <div className="z-40 tham-box">
+                            <div className="z-30 bg-white tham-inner" />
+                        </div>
+                    </div>
+                </button>
             </div>
         </nav>
     );

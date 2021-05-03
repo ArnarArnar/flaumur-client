@@ -1,3 +1,8 @@
+/* Remove blue background on click in mobile */
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
 /**
  * Main wrapper
  */
@@ -20,7 +25,7 @@
  */
 .select-search__value {
     position: relative;
-    z-index: 1;
+    z-index: 45;
 }
 
 .select-search__value::after {
@@ -31,6 +36,7 @@
     right: 19px;
     width: 11px;
     height: 11px;
+    z-index: 45;
 }
 
 /**
@@ -208,6 +214,8 @@
     color: #888;
 }
 
+/* Navbar */
+
 /**
  * This injects Tailwind's base styles and any base styles registered by
  * plugins.
@@ -292,6 +300,7 @@ img#react-modal-image-img.__react_modal_image__large_img {
 .rtl-grid {
     direction: rtl;
 }
+
 .ltr-grid {
     direction: ltr;
 }
@@ -304,3 +313,9 @@ img#react-modal-image-img.__react_modal_image__large_img {
  * your stylesheet by default.
  */
 @tailwind screens;
+
+@layer base {
+    button {
+        @apply focus:outline-none;
+    }
+}

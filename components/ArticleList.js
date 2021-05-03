@@ -35,10 +35,14 @@ export default function ArticleList() {
     }
 
     return (
-        <>
+        <div>
             {data
                 ? data.articleQueryAndPagination.map((article) => (
-                      <ArticleItem class="ml-1 mr-1" key={article.guid} article={article} />
+                      <ArticleItem
+                          className="ml-1 mr-1 pt-9 "
+                          key={article.guid}
+                          article={article}
+                      />
                   ))
                 : null}
             {data && data.articleQueryAndPagination.length >= query.limit ? (
@@ -55,6 +59,6 @@ export default function ArticleList() {
                     <LoadingArticleItem />
                 </>
             ) : null}
-        </>
+        </div>
     );
 }

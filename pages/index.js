@@ -1,13 +1,15 @@
-import React from "react";
+import React from 'react';
 import { initializeApollo, addApolloState } from '../lib/apolloClient';
 import ArticleList from '../components/ArticleList';
 import Sidebar from '../components/Sidebar';
+import Header from '../components/header';
 import { GET_CATEGORIES, GET_CREATORS, QUERY_ARTICLES } from '../pages/api/graphql';
 import { initialState } from '../store/slices/querySlice';
 
 const IndexPage = (data) => {
     return (
         <>
+            <Header />
             <Sidebar data={data} />
             <ArticleList data={data} />
         </>
