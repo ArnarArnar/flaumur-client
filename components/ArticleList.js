@@ -10,6 +10,7 @@ import { selectQuery, setLimit } from '../store/slices/querySlice';
 export default function ArticleList() {
     const query = useSelector(selectQuery);
     const dispatch = useDispatch();
+    const [showLoading, setShowLoading] = React.useState(false);
     const { loading, error, data } = useQuery(QUERY_ARTICLES, {
         variables: {
             query: query
@@ -17,17 +18,36 @@ export default function ArticleList() {
         fetchPolicy: 'network-only'
     });
 
+    React.useEffect(() => {
+        setShowLoading(true);
+        setTimeout(() => {
+            setShowLoading(false);
+        }, [2000]);
+    }, [error]);
+
     const loadMorePosts = () => {
         dispatch(setLimit(query.limit * 2));
     };
 
     if (error) {
         if (error.message === '{"message":"400: not found","name":"Error"}') {
-            return (
-                <div className="mt-16 text-center text-gray-400">
-                    Engar fréttir fundust með þessum leitarskilyrðum
-                </div>
-            );
+            if (showLoading) {
+                return (
+                    <div className="relative pt-9">
+                        <LoadingArticleItem />
+                        <LoadingArticleItem />
+                        <div className="absolute top-0 left-0 right-0 p-12 text-center text-gray-400 ">
+                            Engar fréttir fundust með þessum leitarskilyrðum
+                        </div>
+                    </div>
+                );
+            } else {
+                return (
+                    <div className="pt-12 text-center text-gray-400 ">
+                        Engar fréttir fundust með þessum leitarskilyrðum
+                    </div>
+                );
+            }
         }
         return (
             <div className="mt-16 text-center text-gray-400">Internal Error, please try again</div>
@@ -53,11 +73,11 @@ export default function ArticleList() {
                     {loading ? null : 'Sækja fleiri fréttir'}
                 </button>
             ) : null}
-            {loading ? (
-                <>
+            {loading || (data && data.articleQueryAndPagination.length === 0) ? (
+                <div className="pt-9">
                     <LoadingArticleItem />
                     <LoadingArticleItem />
-                </>
+                </div>
             ) : null}
         </div>
     );

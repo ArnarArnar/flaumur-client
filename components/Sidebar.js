@@ -272,7 +272,7 @@ export default function Sidebar({ data }) {
                             />
                         ) : null}
                         {category ? (
-                            <div className="flex mb-4 justify-evenly">
+                            <div className="flex mt-1 mb-4 ml-2 mr-2 justify-evenly">
                                 <div
                                     onClick={() => {
                                         addFilter(category, 'categories', 'In');
@@ -321,7 +321,7 @@ export default function Sidebar({ data }) {
                             />
                         ) : null}
                         {creator ? (
-                            <div className="flex mb-4 justify-evenly">
+                            <div className="flex mt-1 mb-4 ml-2 mr-2 justify-evenly">
                                 <div
                                     onClick={() => {
                                         addFilter(creator, 'creators', 'In');

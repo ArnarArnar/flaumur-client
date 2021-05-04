@@ -24,7 +24,6 @@ export async function getStaticProps() {
         variables: {
             query: initialState()
         },
-
         fetchPolicy: 'network-only'
     });
 
@@ -33,7 +32,6 @@ export async function getStaticProps() {
         variables: {
             query: initialState()
         },
-
         fetchPolicy: 'network-only'
     });
     const { data: categoriesData } = await apolloClient.query({
@@ -41,7 +39,6 @@ export async function getStaticProps() {
         variables: {
             query: initialState()
         },
-
         fetchPolicy: 'network-only'
     });
 
