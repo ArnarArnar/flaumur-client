@@ -18,8 +18,6 @@ export default function ArticleList() {
         fetchPolicy: 'network-only'
     });
 
-    console.log('data :>> ', data);
-
     React.useEffect(() => {
         setShowLoading(true);
         setTimeout(() => {

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-import Image from 'next/image';
+//import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 
 import SelectSearch, { fuzzySearch } from 'react-select-search/dist/cjs';
@@ -422,12 +422,12 @@ export default function Sidebar({ data }) {
                             className={`z-20 flex items-center focus:outline-none justify-center w-16 h-16   rounded-full ${
                                 isOpen ? 'bg-black' : 'bg-gray-500'
                             }`}>
-                            <Image
+                            {/* <Image
                                 priority="true"
                                 src="/img/remove_filter.svg"
                                 width="40"
                                 height="40"
-                            />
+                            /> */}
                         </span>
                     </button>
                 ) : null}
