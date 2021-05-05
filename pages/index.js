@@ -2,10 +2,10 @@ import React from 'react';
 import { initializeApollo, addApolloState } from '../lib/apolloClient';
 import ArticleList from '../components/ArticleList';
 import Sidebar from '../components/Sidebar';
-import Header from '../components/header';
+import Header from '../components/Header';
 import { GET_CATEGORIES, GET_CREATORS, QUERY_ARTICLES } from '../pages/api/graphql';
 import { initialState } from '../store/slices/querySlice';
-import Beta from '../components/beta';
+import Beta from '../components/Beta';
 
 const IndexPage = (data) => {
     return (
