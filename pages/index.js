@@ -5,10 +5,12 @@ import Sidebar from '../components/Sidebar';
 import Header from '../components/header';
 import { GET_CATEGORIES, GET_CREATORS, QUERY_ARTICLES } from '../pages/api/graphql';
 import { initialState } from '../store/slices/querySlice';
+import Beta from '../components/beta';
 
 const IndexPage = (data) => {
     return (
         <>
+            <Beta />
             <Header />
             <Sidebar data={data} />
             <ArticleList data={data} />

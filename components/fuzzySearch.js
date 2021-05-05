@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import Fuse from 'fuse.js';
 
 export default function fuzzySearch(options) {

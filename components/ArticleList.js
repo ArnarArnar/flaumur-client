@@ -18,6 +18,8 @@ export default function ArticleList() {
         fetchPolicy: 'network-only'
     });
 
+    console.log('data :>> ', data);
+
     React.useEffect(() => {
         setShowLoading(true);
         setTimeout(() => {
@@ -36,14 +38,14 @@ export default function ArticleList() {
                     <div className="relative pt-9">
                         <LoadingArticleItem />
                         <LoadingArticleItem />
-                        <div className="absolute top-0 left-0 right-0 p-12 text-center text-gray-400 ">
+                        <div className="absolute top-0 left-0 right-0 p-32 text-center text-gray-400 ">
                             Engar fréttir fundust með þessum leitarskilyrðum
                         </div>
                     </div>
                 );
             } else {
                 return (
-                    <div className="pt-12 text-center text-gray-400 ">
+                    <div className="pt-32 text-center text-gray-400 ">
                         Engar fréttir fundust með þessum leitarskilyrðum
                     </div>
                 );
