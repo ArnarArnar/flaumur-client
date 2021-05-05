@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import { ApolloProvider } from '@apollo/client';
 import { useApollo } from '../lib/apolloClient';
 import store from '../store/store.js';
@@ -11,6 +12,9 @@ const App = ({ Component, pageProps }) => {
     return (
         <Provider store={store}>
             <ApolloProvider client={apolloClient}>
+                <Head>
+                    <title>Flaumur</title>
+                </Head>
                 <Component {...pageProps} wait={false} />
             </ApolloProvider>
         </Provider>

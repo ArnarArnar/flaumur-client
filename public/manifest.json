@@ -1,0 +1,17 @@
+{
+    "name": "Flaumur",
+    "short_name": "Flaumur",
+    "theme_color": "#ee831f",
+    "background_color": "#222222",
+    "display": "minimal-ui",
+    "orientation": "portrait",
+    "scope": "/",
+    "start_url": "/",
+    "icons": [
+        {
+            "src": "/img/rss.svg",
+            "purpose": "maskable any",
+            "sizes": "any"
+        }
+    ]
+}
