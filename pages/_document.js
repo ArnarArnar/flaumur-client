@@ -1,15 +1,5 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
-import React, { useEffect, Fragment } from 'react';
-import { register, unregister } from 'next-offline/runtime';
 
-const Test = () => {
-    useEffect(() => {
-        register('/service-worker.js', { scope: '/' });
-        return () => {
-            unregister();
-        };
-    }, []);
-};
 export default class MyDocument extends Document {
     render() {
         return (
