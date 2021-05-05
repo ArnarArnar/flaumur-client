@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 //import { debounce } from '../utilities/helper';
 
-export default function header() {
+export default function Header() {
     // const [prevScrollPos, setPrevScrollPos] = useState(0);
     // const [visible, setVisible] = useState(true);
 
