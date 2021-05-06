@@ -24,9 +24,6 @@ export default function Sidebar({ data }) {
     const [categoriesOpen, setCategoriesOpen] = React.useState(false);
     const [category, setCategory] = React.useState('');
     const [creator, setCreator] = React.useState('');
-    // Toggle filter and close button when mobile keyboard is open
-    const [showButtons, setShowButtons] = React.useState(true);
-    const textInput = React.useRef(null);
     const dispatch = useDispatch();
     const query = useSelector(selectQuery);
 
@@ -183,7 +180,7 @@ export default function Sidebar({ data }) {
                                     </span>
                                     <div className="flex self-end flex-shrink-0">
                                         <button
-                                            className="pl-1 pr-1 mr-1 text-sm font-bold leading-5 bg-gray-600 border border-gray-400 rounded hover:bg-gray-700"
+                                            className="pl-1 pr-1 mr-1 text-sm font-bold leading-5 bg-gray-600 border border-gray-400 rounded select-none hover:bg-gray-700"
                                             onClick={() =>
                                                 modifyFilter(element, operation, 'uncheck')
                                             }>
@@ -191,7 +188,7 @@ export default function Sidebar({ data }) {
                                         </button>
                                         {operation.split('s')[1] == 'In' ? (
                                             <button
-                                                className="pl-1 pr-1 mr-1 text-sm font-bold leading-5 bg-gray-600 border border-gray-400 rounded hover:bg-gray-700"
+                                                className="pl-1 pr-1 mr-1 text-sm font-bold leading-5 bg-gray-600 border border-gray-400 rounded select-none hover:bg-gray-700"
                                                 onClick={() =>
                                                     modifyFilter(element, operation, 'reverse')
                                                 }>
@@ -199,7 +196,7 @@ export default function Sidebar({ data }) {
                                             </button>
                                         ) : (
                                             <button
-                                                className="pl-1 pr-1 mr-1 text-sm font-bold leading-5 bg-gray-600 border border-gray-400 rounded hover:bg-gray-700"
+                                                className="pl-1 pr-1 mr-1 text-sm font-bold leading-5 bg-gray-600 border border-gray-400 rounded select-none hover:bg-gray-700"
                                                 onClick={() =>
                                                     modifyFilter(element, operation, 'reverse')
                                                 }>
@@ -248,7 +245,7 @@ export default function Sidebar({ data }) {
                     <div className="pt-3">
                         <span className="flex items-center justify-end pr-4 mb-3 text-gray-400">
                             <button
-                                className="text-4xl font-black hover:text-gray-300"
+                                className="text-4xl font-black select-none hover:text-gray-300"
                                 onClick={() => {
                                     toggleCategoriesOpen();
                                     setCreatorsOpen(false);
@@ -296,7 +293,7 @@ export default function Sidebar({ data }) {
 
                         <span className="flex items-center justify-end pr-4 text-gray-400 ">
                             <button
-                                className="text-4xl font-black hover:text-gray-300"
+                                className="text-4xl font-black select-none hover:text-gray-300"
                                 onClick={() => {
                                     toggleCreatorsOpen();
                                     setCategoriesOpen(false);
@@ -416,7 +413,7 @@ export default function Sidebar({ data }) {
             <div className="fixed z-40 bottom-5 right-4 ">
                 {areFilters() ? (
                     <button
-                        className="mr-20 align-bottom outline-none focus:outline-none"
+                        className="mr-20 align-bottom outline-none select-none focus:outline-none"
                         onClick={() => dispatch(resetQuery())}>
                         <span
                             className={`z-20 flex items-center focus:outline-none justify-center w-16 h-16   rounded-full ${
@@ -428,7 +425,7 @@ export default function Sidebar({ data }) {
                     </button>
                 ) : null}
                 <button
-                    className="w-16 h-16 mr-2 rounded-full focus:outline-none"
+                    className="w-16 h-16 mr-2 rounded-full select-none focus:outline-none"
                     aria-label="Open Menu"
                     onClick={drawer}>
                     <div

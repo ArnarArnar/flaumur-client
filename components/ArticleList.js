@@ -67,7 +67,7 @@ export default function ArticleList() {
                 : null}
             {data && data.articleQueryAndPagination.length >= query.limit ? (
                 <button
-                    className="px-1 m-4 text-lg font-medium text-green-700 bg-black border border-gray-300 border-solid rounded-sm outline-none focus:outline-none max-content"
+                    className="px-1 m-4 text-lg font-medium text-green-700 bg-black border border-gray-300 border-solid rounded-sm outline-none select-none focus:outline-none max-content"
                     onClick={() => loadMorePosts()}
                     disabled={loading}>
                     {loading ? null : 'Sækja fleiri fréttir'}

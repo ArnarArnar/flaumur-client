@@ -148,7 +148,7 @@ const CreatorButton = ({ name, operation, style }) => {
                     />
                     <label
                         htmlFor="radio1"
-                        className="flex items-center justify-between text-xl text-gray-400 transition cursor-pointer hover:text-gray-300">
+                        className="flex items-center justify-between text-xl text-gray-400 transition cursor-pointer select-none hover:text-gray-300">
                         {!isFilter ? 'Halda óbreyttu' : 'Afvelja leitarskilyrði'}
                         <span className="inline-block w-8 h-8 border-2 border-gray-400 rounded-full flex-no-shrink"></span>
                     </label>
@@ -168,7 +168,7 @@ const CreatorButton = ({ name, operation, style }) => {
                     />
                     <label
                         htmlFor="radio2"
-                        className="flex items-center justify-between text-xl text-gray-400 transition cursor-pointer hover:text-gray-300 ">
+                        className="flex items-center justify-between text-xl text-gray-400 transition cursor-pointer select-none hover:text-gray-300">
                         Niðurstöður með
                         <span className="inline-block w-8 h-8 border-2 border-gray-400 rounded-full shadow-inner flex-no-shrink"></span>
                     </label>
@@ -187,7 +187,7 @@ const CreatorButton = ({ name, operation, style }) => {
                     />
                     <label
                         htmlFor="radio3"
-                        className="flex items-center justify-between text-xl text-gray-400 transition cursor-pointer hover:text-gray-300">
+                        className="flex items-center justify-between text-xl text-gray-400 transition cursor-pointer select-none hover:text-gray-300">
                         Niðurstöður án
                         <span className="inline-block w-8 h-8 border-2 border-gray-400 rounded-full flex-no-shrink"></span>
                     </label>
