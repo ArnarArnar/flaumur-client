@@ -8,7 +8,8 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                gray: colors.trueGray
+                gray: colors.trueGray,
+                rss: '#ee831f'
             },
             height: { max: 'max-content' },
             fontFamily: {

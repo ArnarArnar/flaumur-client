@@ -1,32 +1,17 @@
-import React, { useState, useEffect } from 'react';
-//import { debounce } from '../utilities/helper';
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { setLimit } from '../store/slices/querySlice';
 
 export default function Header() {
-    // const [prevScrollPos, setPrevScrollPos] = useState(0);
-    // const [visible, setVisible] = useState(true);
-
-    // const handleScroll = debounce(() => {
-    //     const currentScrollPos = window.pageYOffset;
-
-    //     setVisible(
-    //         (prevScrollPos > currentScrollPos && prevScrollPos - currentScrollPos > 70) ||
-    //             currentScrollPos < 10
-    //     );
-
-    //     setPrevScrollPos(currentScrollPos);
-    // }, 50);
-
-    // useEffect(() => {
-    //     window.addEventListener('scroll', handleScroll);
-
-    //     return () => window.removeEventListener('scroll', handleScroll);
-    // }, [prevScrollPos, visible, handleScroll]);
-
+    const dispatch = useDispatch();
     return (
-        <div className={`fixed text-center origin-top z-10 w-full h-8 shadow-lg bg-gray-600 `}>
-            <span className="ml-2 text-xl font-semibold" style={{ color: '#ee831f' }}>
+        <div
+            className={`fixed text-center origin-top z-10 w-full h-8 shadow-lg bg-gray-600 `}
+            // Hack to get new data from the server. Apollo makes a new req whenever the query object changes
+            onClick={() => dispatch(setLimit(1))}>
+            <button className="ml-2 text-xl font-semibold text-rss hover:text-yellow-500">
                 Flaumur
-            </span>
+            </button>
         </div>
     );
 }

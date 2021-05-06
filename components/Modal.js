@@ -40,7 +40,7 @@ export function Modal(props, ref) {
 
     return ReactDom.createPortal(
         <>
-            <div className={fade == 'IN' ? 'fade-in-fast' : 'fade-out-fast'}>
+            <div>
                 <div className="fixed inset-0 z-40 bg-black opacity-50"></div>
                 <div
                     onClick={fadeOutAndClose}
