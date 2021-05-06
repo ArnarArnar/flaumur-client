@@ -16,9 +16,10 @@ export function Modal(props, ref) {
         [close]
     );
 
-    const fadeOutAndClose = () => {
-        setFade('OUT');
-        setTimeout(() => (close(), setFade('IN')), 200);
+    const fadeOutAndClose = async () => {
+        await setFade('OUT');
+        await setTimeout(() => close(), 400);
+        setFade('IN');
     };
 
     const handleEscape = useCallback(
