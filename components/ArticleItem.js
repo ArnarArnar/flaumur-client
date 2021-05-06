@@ -15,7 +15,7 @@ export default function ArticleItem({ article }) {
                 <div className="flex flex-col justify-between w-full ">
                     <div className="flex flex-row justify-between">
                         <a
-                            href=""
+                            href={article.url}
                             className="text-lg leading-none text-gray-200 hover:text-gray-50">
                             {article.title}
                         </a>
@@ -39,7 +39,8 @@ export default function ArticleItem({ article }) {
                                                 small={article.image}
                                                 medium={article.image}
                                                 large={article.image}
-                                                alt="Hello World!"
+                                                // TODO: Add image description when possible
+                                                // alt="Hello World!"
                                             />
                                             ;
                                         </div>
