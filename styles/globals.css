@@ -295,3 +295,10 @@ img#react-modal-image-img.__react_modal_image__large_img {
         @apply focus:outline-none;
     }
 }
+
+/* This utility class handles the bottom bar on newer iPhones without the “Home” button. Without it, some elements can fall under the bar, making them unreadable and tough to tap. */
+@layer utilities {
+    .pb-safe {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+}

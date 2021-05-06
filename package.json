@@ -12,6 +12,7 @@
     },
     "dependencies": {
         "@apollo/client": "^3.3.14",
+        "@headlessui/react": "^1.1.1",
         "@reduxjs/toolkit": "^1.5.1",
         "@svgr/webpack": "^5.5.0",
         "deepmerge": "^4.2.2",
@@ -45,6 +46,7 @@
         "stylelint-config-standard": "^21.0.0",
         "stylelint-order": "^4.1.0",
         "stylelint-scss": "^3.19.0",
-        "tailwindcss": "^2.1.1"
+        "tailwindcss": "^2.1.1",
+        "tailwindcss-crossbrowser-touch": "^1.1.2"
     }
 }

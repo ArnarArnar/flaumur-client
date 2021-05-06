@@ -23,7 +23,7 @@ export default function ArticleItem({ article }) {
                         <ModalButton
                             name={article.creator}
                             operation="creators"
-                            style="flex px-1 text-sm font-medium text-gray-300 bg-gray-800 border border-gray-500 border-solid rounded-sm  outline-none hover:bg-gray-600 focus:outline-none "
+                            style="flex px-1 text-sm font-medium text-gray-300 bg-gray-800 border border-gray-500 border-solid rounded-sm  outline-none hover:bg-gray-600 focus:outline-none select-none "
                         />
                     </div>
                     <div>
@@ -60,7 +60,7 @@ export default function ArticleItem({ article }) {
                                                   name={category}
                                                   key={index}
                                                   operation="categories"
-                                                  style="flex px-1 text-xs font-medium text-gray-300 bg-gray-800 border border-solid border-gray-500 rounded-sm outline-none hover:bg-gray-600 focus:outline-none mr-2 mt-2"
+                                                  style="flex px-1 text-xs font-medium text-gray-300 bg-gray-800 border border-solid border-gray-500 rounded-sm outline-none hover:bg-gray-600 focus:outline-none mr-2 mt-2 select-none"
                                               />
                                           );
                                       })
@@ -74,7 +74,7 @@ export default function ArticleItem({ article }) {
                             </div>
 
                             <button
-                                className="px-1 mt-2 ml-2 text-xs font-medium text-green-700 bg-black border border-gray-300 border-solid rounded-sm outline-none focus:outline-none max-content"
+                                className="px-1 mt-2 ml-2 text-xs font-medium text-green-700 bg-black border border-gray-300 border-solid rounded-sm outline-none select-none focus:outline-none max-content"
                                 type="button"
                                 onClick={() => handleSelect()}>
                                 {showContent ? 'Minna' : 'Meira'}

@@ -847,7 +847,18 @@ module.exports = {
         strokeWidth: ['responsive'],
         tableLayout: ['responsive'],
         textAlign: ['responsive'],
-        textColor: ['responsive', 'dark', 'group-hover', 'focus-within', 'hover', 'focus'],
+        textColor: [
+            'responsive',
+            'dark',
+            'group-hover',
+            'focus-within',
+            'hover',
+            'focus',
+            'touch',
+            'no-touch',
+            'no-touch-hover',
+            'no-touch-group-hover'
+        ],
         textDecoration: ['responsive', 'group-hover', 'focus-within', 'hover', 'focus'],
         textOpacity: ['responsive', 'dark', 'group-hover', 'focus-within', 'hover', 'focus'],
         textOverflow: ['responsive'],
@@ -867,5 +878,5 @@ module.exports = {
         wordBreak: ['responsive'],
         zIndex: ['responsive', 'focus-within', 'focus']
     },
-    plugins: [require('tailwind-hamburgers')]
+    plugins: [require('tailwind-hamburgers'), require('tailwindcss-crossbrowser-touch')()]
 };
