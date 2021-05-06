@@ -84,9 +84,9 @@ export default class MyDocument extends Document {
                         href="/img/icons/favicon-16x16.png"
                     />
                     <link rel="manifest" href="/manifest.json" />
-                    <meta name="msapplication-TileColor" content="#22222" />
+                    <meta name="msapplication-TileColor" content="#222222" />
                     <meta name="msapplication-TileImage" content="/img/icons/ms-icon-144x144.png" />
-                    <meta name="theme-color" content="#22222" />
+                    <meta name="theme-color" content="#222222" />
                     <link
                         href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap"
                         rel="stylesheet"
