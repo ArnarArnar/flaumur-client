@@ -422,12 +422,8 @@ export default function Sidebar({ data }) {
                             className={`z-20 flex items-center focus:outline-none justify-center w-16 h-16   rounded-full ${
                                 isOpen ? 'bg-black' : 'bg-gray-500'
                             }`}>
-                            {/* <Image
-                                priority="true"
-                                src="/img/remove_filter.svg"
-                                width="40"
-                                height="40"
-                            /> */}
+                            <source src="/remove-filters.svg" type="image/svg+xml" />
+                            <img className="pt-2.5 h-12" alt="test" src="/remove-filters.svg" />
                         </span>
                     </button>
                 ) : null}

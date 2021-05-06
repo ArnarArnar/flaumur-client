@@ -5,12 +5,30 @@ export default class MyDocument extends Document {
         return (
             <Html lang="is">
                 <Head>
-                    <meta charset="utf-8" />
+                    <meta charSet="utf-8" />
                     <meta
                         name="description"
                         content="Flaumur frétta. Allar íslenskar fréttaveitur á einum stað."
                     />
                     <meta name="keywords" content="Fréttir Leit Fréttaveitur RSS" />
+                    <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="true" />
+                    <link
+                        rel="preload"
+                        as="style"
+                        href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap"
+                    />
+                    <link
+                        rel="stylesheet"
+                        href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap"
+                        onLoad="this.media='all'"
+                    />
+                    <noscript>
+                        <link
+                            rel="stylesheet"
+                            href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap"
+                        />
+                    </noscript>
+                    {/* PWA */}
                     <meta name="apple-mobile-web-app-capable" content="yes" />
                     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
                     <meta name="apple-mobile-web-app-title" content="Flaumur" />
@@ -87,10 +105,6 @@ export default class MyDocument extends Document {
                     <meta name="msapplication-TileColor" content="#222222" />
                     <meta name="msapplication-TileImage" content="/img/icons/ms-icon-144x144.png" />
                     <meta name="theme-color" content="#222222" />
-                    <link
-                        href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap"
-                        rel="stylesheet"
-                    />
                 </Head>
                 <body className="bg-gray-800">
                     <Main />
