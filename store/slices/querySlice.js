@@ -50,10 +50,10 @@ export const querySlice = createSlice({
             state.categoriesNin = [];
         },
         setLimit: (state, action) => {
-            state.limit += action.payload;
+            state.limit = action.payload;
         },
         setOffset: (state, action) => {
-            state.offset += action.payload;
+            state.offset = action.payload;
         },
         resetQuery: () => initialState()
     }

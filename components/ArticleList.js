@@ -12,7 +12,8 @@ export default function ArticleList() {
     const query = useSelector(selectQuery);
     const dispatch = useDispatch();
     const [showLoading, setShowLoading] = React.useState(false);
-    const [hasMore, setHasMore] = React.useState(true);
+    const [showLoadingRefresh, setShowLoadingRefresh] = React.useState(false);
+
     const { loading, error, data } = useQuery(QUERY_ARTICLES, {
         variables: {
             query: query
@@ -21,13 +22,6 @@ export default function ArticleList() {
     });
 
     React.useEffect(() => {
-        // if (error && error.message === '{"message":"400: not found","name":"Error"}') {
-        //     if (data.articleQueryAndPagination.length >= query.limit) {
-        //         setHasMore(false);
-        //     }
-        // } else {
-        //     setHasMore(true);
-        // }
         setShowLoading(true);
         setTimeout(() => {
             setShowLoading(false);
@@ -64,17 +58,41 @@ export default function ArticleList() {
         );
     }
 
+    const refreshData = () => {
+        console.log(`refreshData`, query.limit);
+        if (query.limit !== 30) {
+            dispatch(setLimit(30));
+        } else {
+            dispatch(setLimit(31));
+        }
+        setShowLoadingRefresh(true);
+        setTimeout(() => {
+            setShowLoadingRefresh(false);
+        }, [1000]);
+    };
+
     return (
-        <div>
+        <div className="pt-8">
             <InfiniteScroll
                 dataLength={data.articleQueryAndPagination.length} //This is important field to render the next data
                 next={loadMorePosts}
-                hasMore={data.articleQueryAndPagination.length >= query.limit}
-                endMessage={
-                    <div className="pt-4 text-center text-gray-400 pb-28 ">
-                        Ekki fleiri fréttir með þessum leitarskilyrðum
-                    </div>
+                hasMore={!loading && data.articleQueryAndPagination.length >= query.limit}
+                refreshFunction={refreshData}
+                pullDownToRefresh
+                pullDownToRefreshThreshold={100}
+                pullDownToRefreshContent={
+                    <h3 className="pt-4 text-center text-gray-400 ">
+                        &#8595; Pull down to refresh
+                    </h3>
+                }
+                releaseToRefreshContent={
+                    <h3 className="pt-4 text-center text-gray-400 ">&#8593; Release to refresh</h3>
                 }>
+                {showLoadingRefresh ? (
+                    <div className="relative">
+                        <div className="absolute w-full h-1 shim-red"></div>
+                    </div>
+                ) : null}
                 {data
                     ? data.articleQueryAndPagination.map((article) => (
                           <ArticleItem

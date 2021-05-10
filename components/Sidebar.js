@@ -31,16 +31,6 @@ export default function Sidebar({ data }) {
     const toggleCategoriesOpen = () => setCategoriesOpen(!categoriesOpen);
 
     React.useEffect(() => {
-        if (creatorsOpen) {
-            return;
-        }
-        return () => {
-            let input = document.querySelector('.select-search__input');
-            input.focus();
-        };
-    }, [creatorsOpen]);
-
-    React.useEffect(() => {
         if (categoriesOpen) {
             return;
         }
