@@ -1,6 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import ArticleItem from './ArticleItem';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import LoadingArticleItem from './LoadingArticleItem';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -11,6 +12,7 @@ export default function ArticleList() {
     const query = useSelector(selectQuery);
     const dispatch = useDispatch();
     const [showLoading, setShowLoading] = React.useState(false);
+    const [hasMore, setHasMore] = React.useState(true);
     const { loading, error, data } = useQuery(QUERY_ARTICLES, {
         variables: {
             query: query
@@ -19,6 +21,13 @@ export default function ArticleList() {
     });
 
     React.useEffect(() => {
+        // if (error && error.message === '{"message":"400: not found","name":"Error"}') {
+        //     if (data.articleQueryAndPagination.length >= query.limit) {
+        //         setHasMore(false);
+        //     }
+        // } else {
+        //     setHasMore(true);
+        // }
         setShowLoading(true);
         setTimeout(() => {
             setShowLoading(false);
@@ -31,6 +40,7 @@ export default function ArticleList() {
 
     if (error) {
         if (error.message === '{"message":"400: not found","name":"Error"}') {
+            //setHasMore(false);
             if (showLoading) {
                 return (
                     <div className="relative pt-9">
@@ -56,7 +66,27 @@ export default function ArticleList() {
 
     return (
         <div>
-            {data
+            <InfiniteScroll
+                dataLength={data.articleQueryAndPagination.length} //This is important field to render the next data
+                next={loadMorePosts}
+                hasMore={data.articleQueryAndPagination.length >= query.limit}
+                endMessage={
+                    <div className="pt-4 text-center text-gray-400 pb-28 ">
+                        Ekki fleiri fréttir með þessum leitarskilyrðum
+                    </div>
+                }>
+                {data
+                    ? data.articleQueryAndPagination.map((article) => (
+                          <ArticleItem
+                              className="ml-1 mr-1 pt-9 "
+                              key={article.guid}
+                              article={article}
+                          />
+                      ))
+                    : null}
+            </InfiniteScroll>
+
+            {/* {data
                 ? data.articleQueryAndPagination.map((article) => (
                       <ArticleItem
                           className="ml-1 mr-1 pt-9 "
@@ -64,15 +94,15 @@ export default function ArticleList() {
                           article={article}
                       />
                   ))
-                : null}
-            {data && data.articleQueryAndPagination.length >= query.limit ? (
+                : null} */}
+            {/* {data && data.articleQueryAndPagination.length >= query.limit ? (
                 <button
                     className="px-1 m-4 text-lg font-medium text-green-700 bg-black border border-gray-300 border-solid rounded-sm outline-none select-none focus:outline-none max-content"
                     onClick={() => loadMorePosts()}
                     disabled={loading}>
                     {loading ? null : 'Sækja fleiri fréttir'}
                 </button>
-            ) : null}
+            ) : null} */}
             {loading || (data && data.articleQueryAndPagination.length === 0) ? (
                 <div className="pt-9">
                     <LoadingArticleItem />
