@@ -113,15 +113,13 @@ img#react-modal-image-img.__react_modal_image__large_img {
     height: 36px;
     width: 100%;
     padding: 0 40px 0 16px;
-    @apply text-lg text-gray-100 bg-gray-900 border border-gray-500 rounded;
-
     outline: none;
     font-family: 'Oswald', sans-serif;
-
     text-align: left;
     text-overflow: ellipsis;
     line-height: 36px;
     -webkit-appearance: none;
+    @apply text-lg text-gray-100 bg-gray-900 border border-gray-500 rounded;
 }
 
 .select-search__input::-webkit-search-decoration,
@@ -176,7 +174,7 @@ img#react-modal-image-img.__react_modal_image__large_img {
 }
 
 .select-search--multiple .select-search__option {
-    @apply h-12;
+    @apply h-12 border border-gray-500 rounded;
 }
 
 .select-search__option.is-selected {
@@ -209,7 +207,7 @@ img#react-modal-image-img.__react_modal_image__large_img {
  * Modifiers
  */
 .select-search--multiple {
-    border-radius: 3px;
+    /* border-radius: 3px; */
     overflow: hidden;
 }
 
@@ -239,16 +237,16 @@ img#react-modal-image-img.__react_modal_image__large_img {
 .select-search:not(.select-search--multiple) .select-search__select {
     position: absolute;
     z-index: 2;
-    top: 44px;
+    /* top: 44px; */
     right: 0;
     left: 0;
-    border-radius: 3px;
+    /* border-radius: 3px; */
     overflow: auto;
     max-height: 360px;
 }
 
 .select-search--multiple .select-search__select {
-    @apply relative overflow-auto border border-gray-500 rounded max-h-64;
+    @apply relative overflow-auto max-h-64;
 }
 
 .select-search__not-found {
