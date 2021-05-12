@@ -6,23 +6,25 @@ import Header from '../components/Header';
 import { GET_CATEGORIES, GET_CREATORS, QUERY_ARTICLES } from '../pages/api/graphql';
 import { initialState } from '../store/slices/querySlice';
 import Beta from '../components/Beta';
-import ModalHeadless from '../components/ModalHeadless';
+// import ModalHeadless from '../components/ModalHeadless';
+ import ModalHeadlessButton from '../components/ModalButtonHeadless';
 
 const IndexPage = (data) => {
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(false);
 
     return (
         <>
             <Beta />
             <Header />
             <Sidebar data={data} />
-            <ArticleList data={data} />
-            {/* <ModalHeadless data={data} open={open} />
+            <ArticleList data={data} /> 
+            {/*<ModalHeadless data={data} open={open} />
+            <ModalHeadlessButton data={data} open={open} />
             <div className="w-screen h-screen bg-yellow-300">
                 <button onClick={() => setOpen(!open)} className="border border-gray-700 rounded">
                     Opna
                 </button>
-            </div> */}
+    </div>*/}
         </>
     );
 };

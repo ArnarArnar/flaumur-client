@@ -3,6 +3,7 @@ import ModalImage from 'react-modal-image';
 import * as moment from 'moment';
 import 'moment/locale/is';
 import ModalButton from './ModalButton';
+import ModalButtonHeadless from './ModalButtonHeadless';
 
 export default function ArticleItem({ article }) {
     const [showContent, setShowContent] = React.useState(false);
@@ -20,7 +21,12 @@ export default function ArticleItem({ article }) {
                             {article.title}
                         </a>
 
-                        <ModalButton
+                        {/* <ModalButton
+                            name={article.creator}
+                            operation="creators"
+                            style="flex px-1 text-sm font-medium text-gray-300 bg-gray-800 border border-gray-500 border-solid rounded-sm  outline-none hover:bg-gray-600 focus:outline-none select-none "
+                        /> */}
+                        <ModalButtonHeadless
                             name={article.creator}
                             operation="creators"
                             style="flex px-1 text-sm font-medium text-gray-300 bg-gray-800 border border-gray-500 border-solid rounded-sm  outline-none hover:bg-gray-600 focus:outline-none select-none "
