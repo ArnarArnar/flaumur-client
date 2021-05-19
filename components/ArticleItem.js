@@ -62,12 +62,18 @@ export default function ArticleItem({ article }) {
                                 {article.categories
                                     ? article.categories.map((category, index) => {
                                           return (
-                                              <ModalButton
+                                              <ModalButtonHeadless
                                                   name={category}
                                                   key={index}
                                                   operation="categories"
                                                   style="flex px-1 text-xs font-medium text-gray-300 bg-gray-800 border border-solid border-gray-500 rounded-sm outline-none hover:bg-gray-600 focus:outline-none mr-2 mt-2 select-none"
                                               />
+                                              //   <ModalButton
+                                              //       name={category}
+                                              //       key={index}
+                                              //       operation="categories"
+                                              //       style="flex px-1 text-xs font-medium text-gray-300 bg-gray-800 border border-solid border-gray-500 rounded-sm outline-none hover:bg-gray-600 focus:outline-none mr-2 mt-2 select-none"
+                                              //   />
                                           );
                                       })
                                     : null}

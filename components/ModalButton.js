@@ -1,7 +1,7 @@
+import { useState, Fragment } from 'react';
+import { Dialog, Transition, RadioGroup } from '@headlessui/react';
 import React from 'react';
-import Modal from './Modal';
 import { useDispatch, useSelector } from 'react-redux';
-
 import {
     addToCreatorsIn,
     removeFromCreatorsIn,
@@ -14,16 +14,13 @@ import {
     selectQuery
 } from '../store/slices/querySlice';
 
-const CreatorButton = ({ name, operation, style }) => {
-    const modalRef = React.useRef();
-    const dispatch = useDispatch();
+export default function ModalHeadlessButton({ name, operation, style }) {
+    let [isOpen, setIsOpen] = useState(false);
     const query = useSelector(selectQuery);
-
+    const dispatch = useDispatch();
     const [isFilter, setIsFilter] = React.useState('');
 
-    const openModal = () => {
-        modalRef.current.openModal();
-    };
+    const modalRef = React.useRef();
 
     const getCurrentChecked = (operation, name) => {
         if (operation == 'creators') {
@@ -122,6 +119,14 @@ const CreatorButton = ({ name, operation, style }) => {
         }
     };
 
+    function closeModal() {
+        setIsOpen(false);
+    }
+
+    function openModal() {
+        setIsOpen(true);
+    }
+
     return (
         <div className="relative inline-block group">
             <button
@@ -133,67 +138,117 @@ const CreatorButton = ({ name, operation, style }) => {
                 <span className="flex-1 pr-1 font-semibold">{name}</span>
             </button>
 
-            <Modal ref={modalRef}>
-                <div
-                    className="p-3 border-b border-gray-500 last:border-b-0"
-                    onClick={() => {
-                        !isFilter ? '' : unCheckFilter(name, operation);
-                    }}>
-                    <input
-                        id="radio1"
-                        type="radio"
-                        name="radio"
-                        className="hidden"
-                        defaultChecked={!isFilter ? true : false}
-                    />
-                    <label
-                        htmlFor="radio1"
-                        className="flex items-center justify-between text-xl text-gray-400 transition cursor-pointer select-none hover:text-gray-300 ">
-                        {!isFilter ? 'Halda óbreyttu' : 'Afvelja leitarskilyrði'}
-                        <span className="inline-block w-8 h-8 border-2 border-gray-400 rounded-full flex-no-shrink"></span>
-                    </label>
-                </div>
+            <Transition show={isOpen} as={Fragment}>
+                <Dialog
+                    initialFocus={modalRef}
+                    as="div"
+                    className="fixed inset-0 z-10 overflow-y-auto"
+                    onClose={closeModal}>
+                    <div className="min-h-screen px-4 text-center">
+                        <Transition.Child
+                            enter="transition-opacity ease-linear duration-300"
+                            enterFrom="opacity-0"
+                            enterTo="opacity-100"
+                            leave="transition-opacity ease-linear duration-200"
+                            leaveFrom="opacity-100"
+                            leaveTo="opacity-0">
+                            <Dialog.Overlay className="fixed inset-0 bg-black opacity-20" />
+                        </Transition.Child>
 
-                <div
-                    className="p-3 border-b border-gray-500 last:border-b-0 "
-                    onChange={() => {
-                        addFilter(name, operation, 'In');
-                    }}>
-                    <input
-                        id="radio2"
-                        type="radio"
-                        name="radio"
-                        className="hidden"
-                        defaultChecked={isFilter == 'filterWith' ? true : false}
-                    />
-                    <label
-                        htmlFor="radio2"
-                        className="flex items-center justify-between text-xl text-gray-400 transition cursor-pointer select-none hover:text-gray-300">
-                        Niðurstöður með
-                        <span className="inline-block w-8 h-8 border-2 border-gray-400 rounded-full shadow-inner flex-no-shrink"></span>
-                    </label>
-                </div>
-                <div
-                    className="p-3 border-b border-gray-500 last:border-b-0"
-                    onChange={() => {
-                        addFilter(name, operation, 'Nin');
-                    }}>
-                    <input
-                        id="radio3"
-                        type="radio"
-                        name="radio"
-                        className="hidden"
-                        defaultChecked={isFilter == 'filterWithout' ? true : false}
-                    />
-                    <label
-                        htmlFor="radio3"
-                        className="flex items-center justify-between text-xl text-gray-400 transition cursor-pointer select-none hover:text-gray-300">
-                        Niðurstöður án
-                        <span className="inline-block w-8 h-8 border-2 border-gray-400 rounded-full flex-no-shrink"></span>
-                    </label>
-                </div>
-            </Modal>
+                        {/* This element is to trick the browser into centering the modal contents. */}
+                        <span className="inline-block h-screen align-middle" aria-hidden="true">
+                            &#8203;
+                        </span>
+                        <Transition.Child
+                            as={Fragment}
+                            enter="ease-out duration-300"
+                            enterFrom="opacity-0 scale-95"
+                            enterTo="opacity-100 scale-100"
+                            leave="ease-in duration-200"
+                            leaveFrom="opacity-100 scale-100"
+                            leaveTo="opacity-0 scale-95">
+                            <div className="inline-block w-full max-w-md text-left align-top transition-all transform bg-gray-500 shadow-xl mt-52 rounded-2xl">
+                                <Dialog.Title className="my-2 text-2xl text-center text-white">
+                                    {name}
+                                </Dialog.Title>
+                                <div className="relative flex flex-col w-full bg-gray-700 border-0 rounded-lg shadow-lg outline-none focus:outline-none">
+                                    <Dialog.Description>
+                                        {' '}
+                                        <button
+                                            className="w-full p-3 border-b border-gray-500 last:border-b-0"
+                                            onClick={() => {
+                                                !isFilter ? '' : unCheckFilter(name, operation);
+                                                setIsOpen(false);
+                                            }}>
+                                            <input
+                                                id="radio1"
+                                                type="radio"
+                                                name="radio"
+                                                className="hidden"
+                                                defaultChecked={!isFilter ? true : false}
+                                            />
+
+                                            <label
+                                                ref={modalRef}
+                                                htmlFor="radio1"
+                                                className="flex items-center justify-between text-xl text-gray-400 transition cursor-pointer select-none hover:text-gray-300 ">
+                                                {!isFilter
+                                                    ? 'Halda óbreyttu'
+                                                    : 'Afvelja leitarskilyrði'}
+                                                <span className="inline-block w-8 h-8 border-2 border-gray-400 rounded-full flex-no-shrink"></span>
+                                            </label>
+                                        </button>
+                                        <button
+                                            className="w-full p-3 border-b border-gray-500 last:border-b-0 "
+                                            onChange={() => {
+                                                addFilter(name, operation, 'In');
+                                                setIsOpen(false);
+                                            }}>
+                                            <input
+                                                id="radio2"
+                                                type="radio"
+                                                name="radio"
+                                                className="hidden"
+                                                defaultChecked={
+                                                    isFilter == 'filterWith' ? true : false
+                                                }
+                                            />
+                                            <label
+                                                htmlFor="radio2"
+                                                className="flex items-center justify-between text-xl text-gray-400 transition cursor-pointer select-none hover:text-gray-300">
+                                                Niðurstöður með
+                                                <span className="inline-block w-8 h-8 border-2 border-gray-400 rounded-full shadow-inner flex-no-shrink"></span>
+                                            </label>
+                                        </button>
+                                        <button
+                                            className="w-full p-3 border-b border-gray-500 last:border-b-0"
+                                            onChange={() => {
+                                                addFilter(name, operation, 'Nin');
+                                                setIsOpen(false);
+                                            }}>
+                                            <input
+                                                id="radio3"
+                                                type="radio"
+                                                name="radio"
+                                                className="hidden"
+                                                defaultChecked={
+                                                    isFilter == 'filterWithout' ? true : false
+                                                }
+                                            />
+                                            <label
+                                                htmlFor="radio3"
+                                                className="flex items-center justify-between text-xl text-gray-400 transition cursor-pointer select-none hover:text-gray-300">
+                                                Niðurstöður án
+                                                <span className="inline-block w-8 h-8 border-2 border-gray-400 rounded-full flex-no-shrink"></span>
+                                            </label>
+                                        </button>
+                                    </Dialog.Description>
+                                </div>
+                            </div>
+                        </Transition.Child>
+                    </div>
+                </Dialog>
+            </Transition>
         </div>
     );
-};
-export default CreatorButton;
+}
