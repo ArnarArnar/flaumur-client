@@ -7,7 +7,7 @@ import { GET_CATEGORIES, GET_CREATORS, QUERY_ARTICLES } from '../pages/api/graph
 import { initialState } from '../store/slices/querySlice';
 import Beta from '../components/Beta';
 // import ModalHeadless from '../components/ModalHeadless';
- import ModalHeadlessButton from '../components/ModalButtonHeadless';
+import ModalButton from '../components/ModalButton';
 
 const IndexPage = (data) => {
     const [open, setOpen] = React.useState(false);
@@ -17,7 +17,7 @@ const IndexPage = (data) => {
             <Beta />
             <Header />
             <Sidebar data={data} />
-            <ArticleList data={data} /> 
+            <ArticleList data={data} />
             {/*<ModalHeadless data={data} open={open} />
             <ModalHeadlessButton data={data} open={open} />
             <div className="w-screen h-screen bg-yellow-300">

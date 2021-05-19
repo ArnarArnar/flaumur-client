@@ -3,12 +3,15 @@ import ModalImage from 'react-modal-image';
 import * as moment from 'moment';
 import 'moment/locale/is';
 import ModalButton from './ModalButton';
-import ModalButtonHeadless from './ModalButtonHeadless';
+import { Transition } from '@headlessui/react';
 
 export default function ArticleItem({ article }) {
     const [showContent, setShowContent] = React.useState(false);
 
     const handleSelect = () => setShowContent(!showContent);
+
+    const newItemRef = React.useRef(null);
+    const [heightRef, height] = useHeight();
 
     return (
         <div className="p-3 pt-2 mx-auto bg-black border-b border-gray-600 first:pt-10 last:border-0 max-w-m ">
@@ -21,20 +24,23 @@ export default function ArticleItem({ article }) {
                             {article.title}
                         </a>
 
-                        {/* <ModalButton
-                            name={article.creator}
-                            operation="creators"
-                            style="flex px-1 text-sm font-medium text-gray-300 bg-gray-800 border border-gray-500 border-solid rounded-sm  outline-none hover:bg-gray-600 focus:outline-none select-none "
-                        /> */}
-                        <ModalButtonHeadless
+                        <ModalButton
                             name={article.creator}
                             operation="creators"
                             style="flex px-1 text-sm font-medium text-gray-300 bg-gray-800 border border-gray-500 border-solid rounded-sm  outline-none hover:bg-gray-600 focus:outline-none select-none "
                         />
                     </div>
                     <div>
-                        {showContent ? (
-                            <div className="mt-2 mb-1 text-base font-light leading-5 text-gray-400 overflow-ellipsis">
+                        <Transition
+                            ref={heightRef}
+                            show={showContent}
+                            enter="transition ease-in-out duration-300 transform"
+                            enterFrom=" translate-y-0"
+                            enterTo="-translate-y-full"
+                            leave="transition ease-in-out duration-300 transform"
+                            leaveFrom="translate-y-0"
+                            leaveTo="-translate-y-full">
+                            <div className="mt-2 mb-1 overflow-hidden text-base font-light leading-5 text-gray-400">
                                 {article.image ? (
                                     <div
                                         id="imageContainer"
@@ -54,7 +60,7 @@ export default function ArticleItem({ article }) {
                                 ) : null}
                                 {article.description}
                             </div>
-                        ) : null}
+                        </Transition>
                     </div>
                     <div className="flex justify-between">
                         <div className="flex">
