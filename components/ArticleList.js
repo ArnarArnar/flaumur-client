@@ -40,14 +40,14 @@ export default function ArticleList() {
                     <div className="relative pt-9">
                         <LoadingArticleItem />
                         <LoadingArticleItem />
-                        <div className="absolute top-0 left-0 right-0 p-32 text-center text-gray-400 ">
+                        <div className="absolute top-0 left-0 right-0 p-32 text-center text-gray-400 w-max ">
                             Engar fréttir fundust með þessum leitarskilyrðum
                         </div>
                     </div>
                 );
             } else {
                 return (
-                    <div className="pt-32 text-center text-gray-400 ">
+                    <div className="absolute top-0 left-0 right-0 p-32 text-center text-gray-400 w-max ">
                         Engar fréttir fundust með þessum leitarskilyrðum
                     </div>
                 );
@@ -79,13 +79,15 @@ export default function ArticleList() {
                 hasMore={!loading && data.articleQueryAndPagination.length >= query.limit}
                 refreshFunction={refreshData}
                 pullDownToRefresh
-                endMessage={
-                    <div className="relative pt-9">
-                        <div className="absolute top-0 left-0 right-0 p-6 text-center text-gray-400 ">
-                            Ekki fleiri fréttir með þessum leitarskilyrðum
-                        </div>
-                    </div>
-                }
+                // endMessage={
+                //     !loading || showLoading ? (
+                //         <div className="relative pt-9">
+                //             <div className="top-0 left-0 right-0 text-center text-gray-400 ">
+                //                 Ekki fleiri fréttir með þessum leitarskilyrðum
+                //             </div>
+                //         </div>
+                //     ) : null
+                // }
                 pullDownToRefreshThreshold={100}
                 pullDownToRefreshContent={
                     <h3 className="pt-4 text-center text-gray-400 ">
@@ -109,14 +111,20 @@ export default function ArticleList() {
                           />
                       ))
                     : null}
+                {loading || (data && data.articleQueryAndPagination.length === 0) ? (
+                    <div>
+                        <LoadingArticleItem />
+                        <LoadingArticleItem />
+                    </div>
+                ) : null}
+                {!loading && data && data.articleQueryAndPagination.length < query.limit ? (
+                    <div className="relative pt-9">
+                        <div className="top-0 left-0 right-0 text-center text-gray-400 ">
+                            Ekki fleiri fréttir með þessum leitarskilyrðum
+                        </div>
+                    </div>
+                ) : null}
             </InfiniteScroll>
-
-            {loading || (data && data.articleQueryAndPagination.length === 0) ? (
-                <div className="pt-9">
-                    <LoadingArticleItem />
-                    <LoadingArticleItem />
-                </div>
-            ) : null}
         </div>
     );
 }
