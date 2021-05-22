@@ -80,6 +80,12 @@ export default function ModalSearch({ data, title }) {
         setIsOpen(true);
     }
 
+    const isSelected = () => {
+        if (creator || category) {
+            return true;
+        } else return false;
+    };
+
     return (
         <div>
             <button
@@ -128,30 +134,41 @@ export default function ModalSearch({ data, title }) {
                                 </Dialog.Title>
 
                                 <div className="flex flex-wrap h-32 p-6 px-12 bg-gray-700 rounded-lg ">
-                                    {creator ? (
+                                    <Transition
+                                        as={Fragment}
+                                        show={!!creator}
+                                        enter="transition ease-out duration-75 "
+                                        enterFrom="transform opacity-0 scale-0"
+                                        enterTo="transform opacity-100 scale-100">
                                         <div className="flex justify-between w-full mb-4">
-                                            <button
-                                                onClick={() => {
-                                                    addFilter(creator, 'creators', 'In');
-                                                    setCreator('');
-                                                    closeModal();
-                                                }}
-                                                className="flex px-1 font-medium text-green-700 bg-gray-800 border border-gray-500 border-solid rounded-sm outline-none text-s hover:bg-gray-600 focus:outline-none">
-                                                Niðurstöður með
-                                            </button>
-                                            <button
-                                                onClick={() => {
-                                                    addFilter(creator, 'creators', 'Nin');
-                                                    setCreator('');
-                                                    closeModal();
-                                                }}
-                                                className="flex px-1 font-medium text-red-700 bg-gray-800 border border-gray-500 border-solid rounded-sm outline-none text-s hover:bg-gray-600 focus:outline-none">
-                                                Niðurstöður án
-                                            </button>
+                                            <>
+                                                <button
+                                                    onClick={() => {
+                                                        addFilter(creator, 'creators', 'In');
+                                                        setCreator('');
+                                                        closeModal();
+                                                    }}
+                                                    className="flex px-1 font-medium text-green-700 bg-gray-800 border border-gray-500 border-solid rounded-sm outline-none text-s hover:bg-gray-600 focus:outline-none">
+                                                    Niðurstöður með
+                                                </button>
+                                                <button
+                                                    onClick={() => {
+                                                        addFilter(creator, 'creators', 'Nin');
+                                                        setCreator('');
+                                                        closeModal();
+                                                    }}
+                                                    className="flex px-1 font-medium text-red-700 bg-gray-800 border border-gray-500 border-solid rounded-sm outline-none text-s hover:bg-gray-600 focus:outline-none">
+                                                    Niðurstöður án
+                                                </button>
+                                            </>
                                         </div>
-                                    ) : null}
-
-                                    {category ? (
+                                    </Transition>
+                                    <Transition
+                                        as={Fragment}
+                                        show={!!category}
+                                        enter="transition ease-out duration-75 "
+                                        enterFrom="transform opacity-0 scale-0"
+                                        enterTo="transform opacity-100 scale-100">
                                         <div className="flex justify-between w-full mb-4">
                                             <button
                                                 onClick={() => {
@@ -172,7 +189,7 @@ export default function ModalSearch({ data, title }) {
                                                 Niðurstöður án
                                             </button>
                                         </div>
-                                    ) : null}
+                                    </Transition>
 
                                     {title !== 'FLOKKAR' ? (
                                         <div className="self-end w-full">
@@ -197,7 +214,7 @@ export default function ModalSearch({ data, title }) {
                                                 search
                                                 printOptions="always"
                                                 autoFocus={true}
-                                                placeholder="Veldu vefsíðu"
+                                                placeholder="Veldu flokk"
                                                 value={category}
                                                 onChange={setCategory}
                                                 filterOptions={(options) => {
