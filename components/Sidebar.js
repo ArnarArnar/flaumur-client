@@ -1,14 +1,13 @@
-import React, { useState, useEffect, useRef, Fragment } from 'react';
-import { Transition, Dialog } from '@headlessui/react';
-//import Image from 'next/image';
+import { Dialog, Transition } from '@headlessui/react';
+import React, { Fragment, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import ModalButton from './ModalButton';
-import SelectSearch, { fuzzySearch } from 'react-select-search/dist/cjs';
 
-import { selectQuery, resetQuery } from '../store/slices/querySlice';
+import { resetQuery, selectQuery } from '../store/slices/querySlice';
+import ModalButton from './ModalButton';
+import ModalSearch from './ModalSearch';
 
 export default function Sidebar({ data }) {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const dispatch = useDispatch();
     const query = useSelector(selectQuery);
 
@@ -34,7 +33,7 @@ export default function Sidebar({ data }) {
                                         <ModalButton
                                             name={element}
                                             operation="creators"
-                                            style={`flex px-1 my-1 text-base  font-medium text-gray-300 bg-gray-700 border border-gray-500 border-solid rounded-sm  outline-none hover:bg-gray-600 focus:outline-none select-none ${
+                                            style={`flex px-1 my-1 text-base  font-medium text-gray-300 bg-gray-700 border border-gray-500 border-solid rounded-sm hover:text-white  outline-none hover:bg-gray-600 focus:outline-none select-none ${
                                                 operation == 'creatorsIn' ||
                                                 operation == 'categoriesIn'
                                                     ? 'last:mb-3'
@@ -84,7 +83,7 @@ export default function Sidebar({ data }) {
                             leaveTo="opacity-0">
                             <Dialog.Overlay className="absolute inset-0 transition-opacity bg-gray-900 bg-opacity-75" />
                         </Transition.Child>
-                        <div className="fixed inset-y-0 right-0 flex w-3/4 max-w-full ">
+                        <div className="fixed inset-y-0 right-0 flex max-w-3/4 ">
                             <Transition.Child
                                 as={Fragment}
                                 enter="transform transition ease-in-out duration-500 sm:duration-700"
@@ -94,29 +93,21 @@ export default function Sidebar({ data }) {
                                 leaveFrom="translate-x-0"
                                 leaveTo="translate-x-full">
                                 <div className="relative w-screen max-w-md">
-                                    <div className="flex flex-col h-full py-6 overflow-y-scroll bg-white bg-gray-700 shadow-xl">
+                                    <div className="flex flex-col h-full py-6 overflow-y-scroll bg-gray-700 shadow-xl">
                                         {/* BREAK: Start of content */}
                                         <div className="flex flex-col w-full p-3 pt-10 h-4/5">
                                             <div className="relative w-full mb-2 bg-gray-500 rounded h-1/2 scrollbar-thumb-gray-600">
                                                 <div className="h-full pb-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-thumb-rounded-md rtl-grid">
                                                     <>
-                                                        <button className="absolute left-0 flex flex-row-reverse w-full p-3 text-lg text-gray-200 bg-gray-500 rounded-md rounded-tl-md">
-                                                            <div className="self-center pl-1 pr-2">
-                                                                <source
-                                                                    src="/search.svg"
-                                                                    type="image/svg+xml"
-                                                                />
-                                                                <img
-                                                                    className="h-6 "
-                                                                    alt="search"
-                                                                    src="/search.svg"
-                                                                />
-                                                            </div>
-                                                            <div>Leita</div>
-                                                        </button>
-                                                        <div className="absolute right-0">
+                                                        <ModalSearch
+                                                            title="VEFSIÐUR"
+                                                            searchType="creators"
+                                                            data={data.creatorsList}
+                                                        />
+
+                                                        <div className="absolute top-0 right-0">
                                                             <div className="p-2 text-4xl font-black leading-none text-gray-300 bg-gray-700 select-none rounded-bl-md ">
-                                                                VEFSÍÐUR
+                                                                VEFSIÐUR
                                                             </div>
                                                         </div>
                                                     </>
@@ -139,21 +130,12 @@ export default function Sidebar({ data }) {
                                             <div className="relative w-full mt-2 bg-gray-500 rounded h-1/2 scrollbar-thumb-gray-600">
                                                 <div className="h-full pb-2 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-thumb-rounded-md rtl-grid">
                                                     <>
-                                                        <button className="absolute left-0 flex flex-row-reverse w-full p-3 text-lg text-gray-200 bg-gray-500 rounded-md rounded-tl-md">
-                                                            <div className="self-center pl-1 pr-2">
-                                                                <source
-                                                                    src="/search.svg"
-                                                                    type="image/svg+xml"
-                                                                />
-                                                                <img
-                                                                    className="h-6 "
-                                                                    alt="search"
-                                                                    src="/search.svg"
-                                                                />
-                                                            </div>
-                                                            <div>Leita</div>
-                                                        </button>
-                                                        <div className="absolute right-0">
+                                                        <ModalSearch
+                                                            title="FLOKKAR"
+                                                            searchType="categories"
+                                                            data={data.categoriesList}
+                                                        />
+                                                        <div className="absolute top-0 right-0">
                                                             <div className="p-2 text-4xl font-black leading-none text-gray-300 bg-gray-700 select-none rounded-bl-md ">
                                                                 FLOKKAR
                                                             </div>

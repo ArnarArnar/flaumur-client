@@ -1,30 +1,20 @@
 import React from 'react';
-import { initializeApollo, addApolloState } from '../lib/apolloClient';
+
 import ArticleList from '../components/ArticleList';
-import Sidebar from '../components/Sidebar';
+import Beta from '../components/Beta';
 import Header from '../components/Header';
+import Sidebar from '../components/Sidebar';
+import { addApolloState, initializeApollo } from '../lib/apolloClient';
 import { GET_CATEGORIES, GET_CREATORS, QUERY_ARTICLES } from '../pages/api/graphql';
 import { initialState } from '../store/slices/querySlice';
-import Beta from '../components/Beta';
-// import ModalHeadless from '../components/ModalHeadless';
-import ModalButton from '../components/ModalButton';
 
 const IndexPage = (data) => {
-    const [open, setOpen] = React.useState(false);
-
     return (
         <>
             <Beta />
             <Header />
             <Sidebar data={data} />
             <ArticleList data={data} />
-            {/*<ModalHeadless data={data} open={open} />
-            <ModalHeadlessButton data={data} open={open} />
-            <div className="w-screen h-screen bg-yellow-300">
-                <button onClick={() => setOpen(!open)} className="border border-gray-700 rounded">
-                    Opna
-                </button>
-    </div>*/}
         </>
     );
 };
