@@ -42,7 +42,9 @@ export default function ShowMoreAnimated({ article, showContent }) {
         <animated.div style={{ ...slideInStyles, overflow: 'hidden' }}>
             <div
                 ref={heightRef}
-                className="mb-1 text-base font-light leading-5 text-gray-400 overflow-ellipsis">
+                className={`mb-1 text-base font-light leading-5 text-gray-400 overflow-ellipsis ${
+                    article.image ? 'min-h-8' : ''
+                }`}>
                 {article.image ? (
                     <div id="imageContainer" className="float-right h-full ml-2 md:hidden">
                         <div className="relative pb-32 pr-32 overflow-hidden rounded">
