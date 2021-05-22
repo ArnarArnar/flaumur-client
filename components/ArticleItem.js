@@ -1,7 +1,9 @@
+import 'moment/locale/is';
+
+import * as moment from 'moment';
 import React from 'react';
 import ModalImage from 'react-modal-image';
-import * as moment from 'moment';
-import 'moment/locale/is';
+
 import ModalButton from './ModalButton';
 
 export default function ArticleItem({ article }) {
