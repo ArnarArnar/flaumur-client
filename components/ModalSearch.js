@@ -24,8 +24,6 @@ export default function ModalSearch({ data, title }) {
 
     const dispatch = useDispatch();
     const query = useSelector(selectQuery);
-    //const modalState = useSelector(selectSearchModal);
-    //const isOpen = useSelector(selectIsOpen);
 
     const addFilter = (name, operation, addOrRemove) => {
         checkIfAlreadyInReverse(name, operation, addOrRemove);
@@ -79,12 +77,6 @@ export default function ModalSearch({ data, title }) {
     function openModal() {
         setIsOpen(true);
     }
-
-    const isSelected = () => {
-        if (creator || category) {
-            return true;
-        } else return false;
-    };
 
     return (
         <div>

@@ -1,4 +1,4 @@
-import React, { createElement } from 'react';
+import React from 'react';
 import { useLayoutEffect, useRef, useState } from 'react';
 import ModalImage from 'react-modal-image';
 import { animated, config, useSpring } from 'react-spring';
@@ -9,7 +9,7 @@ export function useHeight({ on = true /* no value means on */ } = {}) {
     const heightRef = useRef(height);
     const [ro] = useState(
         () =>
-            new ResizeObserver((packet) => {
+            new ResizeObserver(() => {
                 if (ref.current && heightRef.current !== ref.current.offsetHeight) {
                     heightRef.current = ref.current.offsetHeight;
                     set(ref.current.offsetHeight);
