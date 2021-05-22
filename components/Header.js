@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+
 import { setLimit } from '../store/slices/querySlice';
 
 export default function Header() {

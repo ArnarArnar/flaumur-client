@@ -26,7 +26,9 @@ module.exports = {
     rules: {
         'prettier/prettier': ['error', {}, { usePrettierrc: true }], // Use our .prettierrc file as source
         'react/prop-types': 'off',
-        'react/react-in-jsx-scope': 'off'
+        'react/react-in-jsx-scope': 'off',
+        'simple-import-sort/imports': 'error',
+        'simple-import-sort/exports': 'error'
     },
     plugins: ['simple-import-sort']
 };

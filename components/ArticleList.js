@@ -1,12 +1,12 @@
-import React from 'react';
 import { useQuery } from '@apollo/client';
-import ArticleItem from './ArticleItem';
+import React from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
-import LoadingArticleItem from './LoadingArticleItem';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { QUERY_ARTICLES } from '../pages/api/graphql';
 import { selectQuery, setLimit } from '../store/slices/querySlice';
+import ArticleItem from './ArticleItem';
+import LoadingArticleItem from './LoadingArticleItem';
 
 export default function ArticleList() {
     const query = useSelector(selectQuery);
@@ -74,11 +74,18 @@ export default function ArticleList() {
     return (
         <div className="pt-8">
             <InfiniteScroll
-                dataLength={data.articleQueryAndPagination.length} //This is important field to render the next data
+                dataLength={data.articleQueryAndPagination.length}
                 next={loadMorePosts}
                 hasMore={!loading && data.articleQueryAndPagination.length >= query.limit}
                 refreshFunction={refreshData}
                 pullDownToRefresh
+                endMessage={
+                    <div className="relative pt-9">
+                        <div className="absolute top-0 left-0 right-0 p-6 text-center text-gray-400 ">
+                            Ekki fleiri fréttir með þessum leitarskilyrðum
+                        </div>
+                    </div>
+                }
                 pullDownToRefreshThreshold={100}
                 pullDownToRefreshContent={
                     <h3 className="pt-4 text-center text-gray-400 ">
@@ -104,23 +111,6 @@ export default function ArticleList() {
                     : null}
             </InfiniteScroll>
 
-            {/* {data
-                ? data.articleQueryAndPagination.map((article) => (
-                      <ArticleItem
-                          className="ml-1 mr-1 pt-9 "
-                          key={article.guid}
-                          article={article}
-                      />
-                  ))
-                : null} */}
-            {/* {data && data.articleQueryAndPagination.length >= query.limit ? (
-                <button
-                    className="px-1 m-4 text-lg font-medium text-green-700 bg-black border border-gray-300 border-solid rounded-sm outline-none select-none focus:outline-none max-content"
-                    onClick={() => loadMorePosts()}
-                    disabled={loading}>
-                    {loading ? null : 'Sækja fleiri fréttir'}
-                </button>
-            ) : null} */}
             {loading || (data && data.articleQueryAndPagination.length === 0) ? (
                 <div className="pt-9">
                     <LoadingArticleItem />

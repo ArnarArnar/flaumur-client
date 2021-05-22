@@ -1,12 +1,13 @@
-import React from 'react';
-import Head from 'next/head';
-import { ApolloProvider } from '@apollo/client';
-import { useApollo } from '../lib/apolloClient';
-import store from '../store/store.js';
-import { Provider } from 'react-redux';
-
 import 'tailwindcss/tailwind.css';
 import '../styles/globals.css';
+
+import { ApolloProvider } from '@apollo/client';
+import Head from 'next/head';
+import React from 'react';
+import { Provider } from 'react-redux';
+
+import { useApollo } from '../lib/apolloClient';
+import store from '../store/store.js';
 
 // Automatically check for touch support and attach a .no-touch class to HTML tag, if device doesn’t support touch.
 function touchEventsForTailwind() {
