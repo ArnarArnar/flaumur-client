@@ -1,7 +1,8 @@
 import Head from 'next/head';
-import styles from '../styles/Home.module.css';
-import ClientOnly from '../components/ClientOnly';
+
 import Articles from '../components/ArticleList';
+import ClientOnly from '../components/ClientOnly';
+import styles from '../styles/Home.module.css';
 
 export default function ClientSide() {
     return (
