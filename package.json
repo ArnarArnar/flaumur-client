@@ -28,6 +28,7 @@
         "react-modal-image": "^2.5.0",
         "react-redux": "^7.2.3",
         "react-select-search": "^3.0.6",
+        "react-spring": "^9.1.2",
         "realm-web": "^1.2.1",
         "swr": "^0.5.5",
         "tailwind-hamburgers": "^1.0.2"

@@ -1,10 +1,11 @@
 import 'moment/locale/is';
 
 import * as moment from 'moment';
+import dynamic from 'next/dynamic';
 import React from 'react';
-import ModalImage from 'react-modal-image';
 
 import ModalButton from './ModalButton';
+const ShowMoreAnimated = dynamic(() => import('./ShowMoreAnimated'), { ssr: false });
 
 export default function ArticleItem({ article }) {
     const [showContent, setShowContent] = React.useState(false);
@@ -29,28 +30,7 @@ export default function ArticleItem({ article }) {
                         />
                     </div>
                     <div>
-                        {showContent ? (
-                            <div className="mt-2 mb-1 text-base font-light leading-5 text-gray-400 overflow-ellipsis">
-                                {article.image ? (
-                                    <div
-                                        id="imageContainer"
-                                        className="float-right h-full ml-2 md:hidden">
-                                        <div className="relative pb-32 pr-32 overflow-hidden rounded">
-                                            <ModalImage
-                                                className="absolute object-cover w-full h-full border border-gray-700 border-solid"
-                                                small={article.image}
-                                                medium={article.image}
-                                                large={article.image}
-                                                // TODO: Add image description when possible
-                                                // alt="Hello World!"
-                                            />
-                                            ;
-                                        </div>
-                                    </div>
-                                ) : null}
-                                {article.description}
-                            </div>
-                        ) : null}
+                        <ShowMoreAnimated article={article} showContent={showContent} />
                     </div>
                     <div className="flex justify-between">
                         <div className="flex">
