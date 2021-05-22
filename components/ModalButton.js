@@ -1,16 +1,17 @@
-import { useState, Fragment } from 'react';
-import { Dialog, Transition, RadioGroup } from '@headlessui/react';
+import { Dialog, Transition } from '@headlessui/react';
+import { Fragment, useState } from 'react';
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
 import {
-    addToCreatorsIn,
-    removeFromCreatorsIn,
-    addToCreatorsNin,
-    removeFromCreatorsNin,
     addToCategoriesIn,
-    removeFromCategoriesIn,
     addToCategoriesNin,
+    addToCreatorsIn,
+    addToCreatorsNin,
+    removeFromCategoriesIn,
     removeFromCategoriesNin,
+    removeFromCreatorsIn,
+    removeFromCreatorsNin,
     selectQuery
 } from '../store/slices/querySlice';
 
@@ -20,7 +21,7 @@ export default function ModalHeadlessButton({ name, operation, style }) {
     const dispatch = useDispatch();
     const [isFilter, setIsFilter] = React.useState('');
 
-    const modalRef = React.useRef();
+    const modalRef = React.useRef(null);
 
     const getCurrentChecked = (operation, name) => {
         if (operation == 'creators') {
@@ -128,7 +129,7 @@ export default function ModalHeadlessButton({ name, operation, style }) {
     }
 
     return (
-        <div className="relative inline-block group">
+        <div className="inline-block group">
             <button
                 className={`${style} ${isAFilter(name) ? 'border-gray-800' : ''}`}
                 onClick={() => {
@@ -140,8 +141,8 @@ export default function ModalHeadlessButton({ name, operation, style }) {
 
             <Transition show={isOpen} as={Fragment}>
                 <Dialog
-                    initialFocus={modalRef}
                     as="div"
+                    initialFocus={modalRef}
                     className="fixed inset-0 z-10 overflow-y-auto"
                     onClose={closeModal}>
                     <div className="min-h-screen px-4 text-center">
@@ -167,10 +168,11 @@ export default function ModalHeadlessButton({ name, operation, style }) {
                             leave="ease-in duration-200"
                             leaveFrom="opacity-100 scale-100"
                             leaveTo="opacity-0 scale-95">
-                            <div className="inline-block w-full max-w-md text-left align-top transition-all transform bg-gray-500 shadow-xl mt-52 rounded-2xl">
+                            <div className="inline-block w-full max-w-md text-left align-top transition-all transform bg-gray-500 shadow-xl mt-52 rounded-xl">
                                 <Dialog.Title className="my-2 text-2xl text-center text-white">
                                     {name}
                                 </Dialog.Title>
+
                                 <div className="relative flex flex-col w-full bg-gray-700 border-0 rounded-lg shadow-lg outline-none focus:outline-none">
                                     <Dialog.Description>
                                         {' '}
