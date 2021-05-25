@@ -40,14 +40,14 @@ export default function ArticleList() {
                     <div className="relative pt-9">
                         <LoadingArticleItem />
                         <LoadingArticleItem />
-                        <div className="absolute top-0 left-0 right-0 p-32 text-center text-gray-400 w-max ">
+                        <div className="absolute top-0 left-0 right-0 pt-32 text-center text-gray-400">
                             Engar fréttir fundust með þessum leitarskilyrðum
                         </div>
                     </div>
                 );
             } else {
                 return (
-                    <div className="absolute top-0 left-0 right-0 p-32 text-center text-gray-400 w-max ">
+                    <div className="absolute top-0 left-0 right-0 pt-32 text-center text-gray-400 ">
                         Engar fréttir fundust með þessum leitarskilyrðum
                     </div>
                 );
