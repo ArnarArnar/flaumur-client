@@ -79,15 +79,6 @@ export default function ArticleList() {
                 hasMore={!loading && data.articleQueryAndPagination.length >= query.limit}
                 refreshFunction={refreshData}
                 pullDownToRefresh
-                // endMessage={
-                //     !loading || showLoading ? (
-                //         <div className="relative pt-9">
-                //             <div className="top-0 left-0 right-0 text-center text-gray-400 ">
-                //                 Ekki fleiri fréttir með þessum leitarskilyrðum
-                //             </div>
-                //         </div>
-                //     ) : null
-                // }
                 pullDownToRefreshThreshold={100}
                 pullDownToRefreshContent={
                     <h3 className="pt-4 text-center text-gray-400 ">
