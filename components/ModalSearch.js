@@ -193,10 +193,7 @@ export default function ModalSearch({ data, title }) {
                                                 placeholder="Veldu vefsíðu"
                                                 value={creator}
                                                 onChange={setCreator}
-                                                filterOptions={(options) => {
-                                                    const filter = fuzzySearch(options);
-                                                    return (q) => filter(q).slice(0, 8);
-                                                }}
+                                                filterOptions={fuzzySearch}
                                             />
                                         </div>
                                     ) : (

@@ -54,7 +54,7 @@ export default function ShowMoreAnimated({ article, showContent }) {
                                 medium={article.image}
                                 large={article.image}
                                 // TODO: Add image description when possible
-                                // alt="Hello World!"
+                                // alt=""
                             />
                         </div>
                     </div>

@@ -34,7 +34,6 @@ export default function ArticleList() {
 
     if (error) {
         if (error.message === '{"message":"400: not found","name":"Error"}') {
-            //setHasMore(false);
             if (showLoading) {
                 return (
                     <div className="relative pt-9">
@@ -59,7 +58,6 @@ export default function ArticleList() {
     }
 
     const refreshData = () => {
-        console.log(`refreshData`, query.limit);
         if (query.limit !== 30) {
             dispatch(setLimit(30));
         } else {
