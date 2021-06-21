@@ -56,7 +56,7 @@ export default function ArticleItem({ article }) {
                             </div>
 
                             <button
-                                className="px-1 mt-2 ml-2 font-medium text-green-700 bg-black border border-gray-200 border-solid rounded-sm outline-none pb-0.5 select-none text-s focus:outline-none max-content"
+                                className="px-1 mt-2 ml-2 font-medium text-green-700 bg-black border border-gray-200 border-solid rounded-sm outline-none pb-0.2 select-none text-s focus:outline-none max-content"
                                 type="button"
                                 onClick={() => handleSelect()}>
                                 {showContent ? 'Minna' : 'Meira'}
