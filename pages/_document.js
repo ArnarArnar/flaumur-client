@@ -15,17 +15,17 @@ export default class MyDocument extends Document {
                     <link
                         rel="preload"
                         as="style"
-                        href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap"
+                        href="https://fonts.googleapis.com/css2?family=News+Cycle:wght@400;700&display=swap"
                     />
                     <link
                         rel="stylesheet"
-                        href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap"
+                        href="https://fonts.googleapis.com/css2?family=News+Cycle:wght@400;700&display=swap"
                         onLoad="this.media='all'"
                     />
                     <noscript>
                         <link
                             rel="stylesheet"
-                            href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;300;400;500;600;700&display=swap"
+                            href="https://fonts.googleapis.com/css2?family=News+Cycle:wght@400;700&display=swap"
                         />
                     </noscript>
                     {/* PWA */}

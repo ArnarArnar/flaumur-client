@@ -13,7 +13,7 @@ module.exports = {
             },
             height: { max: 'max-content' },
             fontFamily: {
-                sans: ['Oswald', ...defaultTheme.fontFamily.sans]
+                sans: ['News Cycle', ...defaultTheme.fontFamily.sans]
             }
         },
         screens: {

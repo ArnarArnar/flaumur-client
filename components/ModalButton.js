@@ -136,7 +136,7 @@ export default function ModalHeadlessButton({ name, operation, style }) {
                     getCurrentChecked(operation, name);
                     openModal();
                 }}>
-                <span className="flex-1 pr-1 font-semibold">{name}</span>
+                <span className="flex-1  font-semibold pb-0.5">{name}</span>
             </button>
 
             <Transition show={isOpen} as={Fragment}>
